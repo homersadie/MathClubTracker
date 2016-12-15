@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Scroller";
+}
+<h2>Scroller</h2>
+<div id="scrollerButtons">
+    <div class="conditionbutton" style="float:left; width:80px; background-color:#ccccff" id="btnCarrots" anchor="#carrots">Carrots</div>
+    <div class="conditionbutton" style="float:left; width:80px; background-color:#ffcccc" id="btnPotatoes" anchor="#potatoes">Potatoes</div>
+    <div class="conditionbutton" style="float:left; width:80px; background-color:#ccffcc" id="btnPeas" anchor="#peas">Peas</div>
+    <div class="conditionbutton" style="float: left; width: 80px; background-color: #ffcc66" id="btnApples" anchor="#apples">Apples</div>
+    <div class="conditionbutton" style="float: left; width: 80px; background-color: #ffcc99" id="btnOranges" anchor="#oranges">Oranges</div>
+    <div class="conditionbutton" style="float: left; width: 80px; background-color: #ffff99" id="btnLemons" anchor="#lemons">Lemons</div>
+</div>
+<br/>
+<div id="conditions">
+    <div style="background-color:#ffcccc" id="potatoes">
+        Potatoes
+        <div style="margin-left:20px">This is the div for potatoes</div>
+    </div>
+    <div class="boundary"></div>
+    <div style="background-color:#ccccff" id="carrots">
+        Carrots
+        <div>This is the div for carrots</div>
+    </div>
+    <div class="boundary"></div>
+    <div style="background-color:#ccffcc" id="peas">
+        Peas
+        <div>This is the div for peas</div>
+    </div>
+    <div class="boundary"></div>
+    <div style="background-color:#ffcc66" id="apples">
+        Apples
+        <div style="margin-left:20px">This is the div for apples</div>
+    </div>
+    <div class="boundary"></div>
+    <div style="background-color:#ffcc99" id="oranges">
+        Oranges
+        <div>This is the div for oranges</div>
+    </div>
+    <div class="boundary"></div>
+    <div style="background-color:#ffff99" id="lemons">
+        Lemons
+        <div>This is the div for lemons</div>
+    </div>
+</div>
+
+<br/>
+
+<table>
+    <tbody data-bind="foreach: conditions">
+        <tr>
+            <td><div class="conditionbutton" style="float: left; width: 80px;" data-bind=" text:conditionName, id:conditionName, style: {'background-color': displayColor}, attr: {  'anchor': anchor }"></div>
+</td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+<table>
+    <tr>
+        <td>
+            <div id='chartContainer' style="width:600px; height: 400px" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id='eventText' style="width:600px; height: 30px" />
+        </td>
+    </tr>
+</table>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#conditions").jqxPanel({ width: 550, height: 450 });
+
+        $(".conditionbutton").on('click', function () {
+            $('#conditions').jqxPanel('scrollTo', 0, $(this.attributes["anchor"].nodeValue).position().top);
+        });
+
+        // prepare chart data
+        var sampleData = [
+                { Day: 'Monday', Keith: 30, Erica: 15, George: 25 },
+                { Day: 'Tuesday', Keith: 25, Erica: 25, George: 30 },
+                { Day: 'Wednesday', Keith: 30, Erica: 20, George: 25 },
+                { Day: 'Thursday', Keith: 35, Erica: 25, George: 45 },
+                { Day: 'Friday', Keith: 20, Erica: 20, George: 25 },
+                { Day: 'Saturday', Keith: 30, Erica: 20, George: 30 },
+                { Day: 'Sunday', Keith: 60, Erica: 45, George: 90 }
+        ];
+
+        // prepare jqxChart settings
+        var settings = {
+            title: "Fitness & exercise weekly scorecard",
+            description: "Time spent in vigorous exercise",
+            padding: { left: 5, top: 5, right: 5, bottom: 5 },
+            titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+            source: sampleData,
+            categoryAxis:
+                {
+                    dataField: 'Day',
+                    showGridLines: false
+                },
+            colorScheme: 'scheme04',
+            showToolTips: false,
+            enableAnimations: true,
+            seriesGroups:
+                [
+                    {
+                        type: 'line',
+                        valueAxis:
+                        {
+                            minValue: 0,
+                            maxValue: 100,
+                            unitInterval: 10,
+                            description: 'Time in minutes'
+                        },
+                        mouseover: myEventHandler,
+                        mouseout: myEventHandler,
+                        click: myEventHandler,
+
+                        series: [
+                                { dataField: 'Keith', displayText: 'Keith' },
+                                { dataField: 'Erica', displayText: 'Erica' },
+                                { dataField: 'George', displayText: 'George' }
+                        ]
+                    }
+                ]
+        };
+
+        function myEventHandler(e) {
+            var eventData = '<div><b>Last Event: </b>' + e.event + '<b>, DataField: </b>' + e.serie.dataField + '<b>, Value: </b>' + e.elementValue + "</div>";
+            $('#eventText').html(eventData);
+        };
+
+        // select the chartContainer DIV element and render the chart.
+        $('#chartContainer').jqxChart(settings);
+
+        function AppViewModel() {
+            self.conditions = [
+                    { anchor : '#oranges', conditionName: 'Keith', displayColor: '#cccfff' },
+                    { anchor: '#apples', conditionName: 'Erica', displayColor: '#ccccff' },
+                    { anchor: '#lemons', conditionName: 'George', displayColor: '#cccccf' }
+            ]
+        }
+
+        // Activates knockout.js
+        ko.applyBindings(new AppViewModel());
+
+
+
+
+    });
+
+</script>

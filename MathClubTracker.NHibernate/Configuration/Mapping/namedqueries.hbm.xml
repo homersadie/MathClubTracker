@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="MathClubTracker.Domain" namespace="MathClubTracker.Domain"  xmlns="urn:nhibernate-mapping-2.2">
+  <sql-query name="InitializeData" cacheable="true">
+    exec InitializeData 
+  </sql-query>
+</hibernate-mapping>

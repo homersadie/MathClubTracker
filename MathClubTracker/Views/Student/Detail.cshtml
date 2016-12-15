@@ -1,0 +1,16 @@
+﻿@model MathClubTracker.Domain.DomainTransferObjects.StudentDTO
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Student Detail</h2>
+
+<table>
+    <tr>
+        <td><label>Name</label></td>
+        <td>@Model.LastName</td>
+    </tr>
+</table>
+
+<a href="@Url.Action("Index")" ">Back to Student Maintenance</a>
+

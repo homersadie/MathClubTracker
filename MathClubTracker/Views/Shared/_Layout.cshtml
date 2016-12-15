@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application X</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <link href="~/content/site.css" rel="stylesheet" />
+ 
+        <link href="~/Content/ej/web/default-theme/ej.web.all.min.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+        <script src="~/Scripts/jsrender.min.js"></script>
+        <script src="~/Scripts/ej/web/ej.web.all.min.js"></script>
+        <script src="~/Scripts/Global.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+
+                @RenderBody()
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Math Genius</p>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+</html>

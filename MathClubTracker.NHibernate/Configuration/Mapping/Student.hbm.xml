@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="MathClubTracker.Domain.DomainObjects" assembly="MathClubTracker.Domain"  xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Student" table="Student" schema="dbo">
+    <id name="Id" type="Int32">
+      <column name="Id" not-null="true" />
+      <generator class="identity" />
+    </id>
+    <property name="MathGeniusId" type="Int32">
+      <column name="MathGeniusId" not-null="false" />
+    </property>    
+    <property name="FirstName" type="String">
+      <column name="FirstName" not-null="true" />
+    </property>
+    <property name="LastName" type="String">
+      <column name="LastName" not-null="true" />
+    </property>
+    <property name="Gender" type="String">
+      <column name="Gender" not-null="true" />
+    </property>
+    <property name="GraduationYear" type="Int32">
+      <column name="GraduationYear" not-null="false" />
+    </property>
+
+    <bag name="MyClassSessionStudentBag" inverse="true" generic="true" cascade="all-delete-orphan">
+      <key>
+        <column name="StudentId" not-null="false" precision="10" scale="0" sql-type="int" />
+      </key>
+      <one-to-many class="ClassSessionStudent" />
+    </bag>
+    <!--
+    <bag name="MyPayments" inverse="true" generic="true">
+      <key>
+        <column name="studentId" />
+      </key>
+      <one-to-many class="Payment" />
+    </bag>  
+-->
+  </class>
+</hibernate-mapping>
