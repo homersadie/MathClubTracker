@@ -43,16 +43,7 @@ namespace MathClubTracker.NHibernate
             {
                 if (sessionFactory == null)
                 {
-                    try
-                    {
-
                         sessionFactory = Configuration.BuildSessionFactory();
-                    }
-                    catch (Exception e)
-                    {
-                        int x = 2;
-                    }
-
                 }
                 return sessionFactory;
             }

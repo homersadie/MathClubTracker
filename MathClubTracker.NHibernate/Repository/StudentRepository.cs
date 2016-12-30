@@ -27,10 +27,10 @@ namespace MathClubTracker.NHibernate
         {
         }
 
-        public virtual ICollection<Student> GetAll()
-        {
-            return session.CreateQuery(string.Format("from Student")).List<Student>();
-        }
+        ////public virtual ICollection<Student> GetAll()
+        //{
+        //    return session.CreateQuery(string.Format("from Student")).List<Student>();
+        //}
 
         public virtual IEnumerable<Student> GetPaged(int skip, int top, string orderby)
         {

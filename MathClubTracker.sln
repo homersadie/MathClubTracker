@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathClubTracker.Web", "MathClubTracker\MathClubTracker.Web.csproj", "{E1A6BA11-4AC3-495B-83D0-FB9FE32CF3AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathClubTracker.Tests", "MathClubTracker.Tests\MathClubTracker.Tests.csproj", "{CFDB2C0D-F01D-4F3A-BA79-0DCEB9C03079}"
@@ -8,6 +10,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathClubTracker.Domain", "MathClubTracker.Domain\MathClubTracker.Domain.csproj", "{CFBC3F45-18C9-4A10-9DF5-09F32B5A1350}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathClubTracker.NHibernate", "MathClubTracker.NHibernate\MathClubTracker.NHibernate.csproj", "{E5219BCA-CD4D-4E81-A21C-E925155F3E31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathClubTracker.NHibernate.Tests", "MathClubTracker.NHibernate.Tests\MathClubTracker.NHibernate.Tests.csproj", "{61ACF24A-FECF-45F2-AA12-E03AA706C865}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentGeneration", "..\MenuTester\DocumentGeneration\DocumentGeneration.csproj", "{EE8A8493-E52F-4154-8CBC-DA4FF3342077}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentGenerationTests", "..\MenuTester\DocumentGenerationTests\DocumentGenerationTests.csproj", "{2FDC8707-47C0-4A25-873A-E167B384783C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRXLibrary", "..\MenuTester\QRXLibrary\QRXLibrary.csproj", "{EFD206C0-E525-4D05-8AD9-A46681C759E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScantronGrader", "..\MenuTester\ScantronGrader\ScantronGrader.csproj", "{29B0E369-C2F0-4767-B8A0-D949EA47FC43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuTester", "..\MenuTester\MenuTester\MenuTester.csproj", "{9C2564A5-BABF-4C4C-843C-CA553E3BA357}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +45,30 @@ Global
 		{E5219BCA-CD4D-4E81-A21C-E925155F3E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5219BCA-CD4D-4E81-A21C-E925155F3E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5219BCA-CD4D-4E81-A21C-E925155F3E31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61ACF24A-FECF-45F2-AA12-E03AA706C865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61ACF24A-FECF-45F2-AA12-E03AA706C865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61ACF24A-FECF-45F2-AA12-E03AA706C865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61ACF24A-FECF-45F2-AA12-E03AA706C865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8A8493-E52F-4154-8CBC-DA4FF3342077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8A8493-E52F-4154-8CBC-DA4FF3342077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8A8493-E52F-4154-8CBC-DA4FF3342077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8A8493-E52F-4154-8CBC-DA4FF3342077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FDC8707-47C0-4A25-873A-E167B384783C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDC8707-47C0-4A25-873A-E167B384783C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDC8707-47C0-4A25-873A-E167B384783C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDC8707-47C0-4A25-873A-E167B384783C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD206C0-E525-4D05-8AD9-A46681C759E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD206C0-E525-4D05-8AD9-A46681C759E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD206C0-E525-4D05-8AD9-A46681C759E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD206C0-E525-4D05-8AD9-A46681C759E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29B0E369-C2F0-4767-B8A0-D949EA47FC43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29B0E369-C2F0-4767-B8A0-D949EA47FC43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29B0E369-C2F0-4767-B8A0-D949EA47FC43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29B0E369-C2F0-4767-B8A0-D949EA47FC43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C2564A5-BABF-4C4C-843C-CA553E3BA357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C2564A5-BABF-4C4C-843C-CA553E3BA357}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C2564A5-BABF-4C4C-843C-CA553E3BA357}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C2564A5-BABF-4C4C-843C-CA553E3BA357}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,7 +17,10 @@
 
 @* Student Grid Template *@
 <script type="text/x-jsrender" id="mgTemplate">
-    <a href="@Url.Action("Detail","Student")?id={{:MathGeniusId}}">View {{:MathGeniusId}}</a>
+
+    <a href="@Url.Action("Detail","Student")?id={{:Id}}">View</a>
+    <a href="@Url.Action("Detail","Student")?id={{:Id}}">Edit</a>
+    <a href="@Url.Action("Detail","Student")?id={{:Id}}">Delete</a>
 </script>
 
 
@@ -37,9 +40,10 @@
                 allowSorting: true,
                 allowMultiSorting: true,
                 columns: [
-                    { field: "MathGeniusId", headerText: "MG ID", template: true, templateID: "#mgTemplate", width: 75, textAlign: ej.TextAlign.Left, },
-                        { field: "LastName", headerText: "Last Name", width: 75, textAlign: ej.TextAlign.Left },
-                        { field: "FirstName", headerText: "First Name", width: 75, textAlign: ej.TextAlign.Left },
+                        { field: "Id", headerText: "Action", template: true, templateID: "#mgTemplate", width: 125, textAlign: ej.TextAlign.Left, },
+                        { field: "MathGeniusId", headerText: "MG ID", width: 75, textAlign: ej.TextAlign.Center, },
+                        { field: "LastName", headerText: "Last Name", width: 100, textAlign: ej.TextAlign.Left },
+                        { field: "FirstName", headerText: "First Name", width: 100, textAlign: ej.TextAlign.Left },
                         { field: "Gender", headerText: "Sex", width: 75, textAlign: ej.TextAlign.Center },
                         { field: "GraduationYear", headerText: "Class Of", width: 125, textAlign: ej.TextAlign.Center }
                 ]

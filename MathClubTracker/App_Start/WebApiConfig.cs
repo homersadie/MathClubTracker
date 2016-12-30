@@ -6,6 +6,9 @@ using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 using MathClubTracker.Filters;
 using WebApiContrib.Formatting.Jsonp;
+using System.Web.Http.OData.Builder;
+using MathClubTracker.Domain.DomainObjects;
+
 
 namespace MathClubTracker
 {
@@ -38,7 +41,6 @@ namespace MathClubTracker
                 routeTemplate: "classes/{action}",
                 defaults: new { Controller = "Student", action = RouteParameter.Optional }
             );
-
 
             // These two lines below change the json result formatting to use camel case instead of pascal case.
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();

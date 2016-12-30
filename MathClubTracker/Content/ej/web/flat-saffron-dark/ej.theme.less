@@ -12,6 +12,7 @@
 @header-border-color: #494949;
 @header-font-color: #dddddd;
 @header-icon-color: #cccccc;
+@filtermenu-color: #494949;
 
 @tooltip-line-height : 18px;
 @content-bg-color: #000000;
@@ -231,6 +232,7 @@
 @treegrid-detailcellwrapperfly-border-color: @content-border-color;
 @treegrid-detailcellwrapperfly-shadow-color: @content-border-color;
 @treegrid-detailicon-shadow-color: lighten(@content-bg-color,11%);
+@filtermenudialog-color:@filtermenu-color;
 
 @gantt-theme-line-color: @active-bg-stcolor;
 @gantt-connectorline-color: @gantt-connectorline-arrow-bg-color;
@@ -821,6 +823,7 @@
 .high-contrast-grid-button-border-color() {}
 .high-contrast-schedule-content-icon-color() {}
 .high-contrast-upload-btn-hover-color(){}
+.high-contrast-stylefor-daterange(){}
 /*---------------- Office-365 ----------------*/
 
 .office-grid-footer-bg-color() {}
@@ -862,6 +865,19 @@
 .office-upload-btn-hover-color(){}
 .office-tab-header-bghover-color{}
 .office-upload-button-border(){}
+.office-tab-border-left-right(){
+    border: none;
+}
+.office-pivot-treeview-hover-border(){}
+.office-pivot-button-active(){}
+.office-pivot-treeview-active-color(){}
+.office-pivot-groupingBar-button-active(){}
+.office-pivot-button-border(){
+    border:1px solid;
+}
+.office-pivot-dialog-icon-hover(){
+   background:@pivotList-dialog-close-hvr-color;
+}
 /*------------------ material theme ---------------------*/
 
 .material-tab-border() {
@@ -869,6 +885,25 @@
 }
 .material-tab-borderbottom() {
     border-top: 3px @border-type @active-bg-stcolor;
+}
+
+.material-tab-right-border(){ 
+  border-left: transparent;
+}
+.material-tab-right-bottom-border(){
+    border-right: 3px @border-type @active-bg-stcolor;
+}
+.material-tab-left-border(){
+    border-right: transparent;
+}
+.material-tab-left-bottom-border(){
+    border-left: 3px @border-type @active-bg-stcolor;
+}
+.material-tab-bottom-border(){
+    border-top: transparent;
+}
+.material-tab-bottom-border-bottom(){
+    border-bottom: 3px @border-type @active-bg-stcolor;
 }
 
 .material-datepick-header-icon-color() {}
@@ -949,7 +984,9 @@
 .material-upload-dialog-bg-color(){}
 .material-rte-splitbtn-radius(){}
 /*-----------------------HeatMap Definition-----------------*/
-@hmp-border-color: #c8c8c8;
+@hmp-border-color: #808080;
+@hmp-font-color: #FFFFFF;
+@hmp-background-color: #000000;
 /* Common style */
 
 .e-content-area{
@@ -1004,6 +1041,10 @@ color: @header-icon-color;
 .e-grid .e-gridheader .e-icon{
  .switch-grid-header-icon;   
  color: @header-icon-color;
+}
+.e-grid .e-dialog > .e-dialog-scroller,
+.e-grid .e-excelfilter.e-dlgcontainer {
+  border:@border-size @border-type @content-border-color ~"\9";
 }
 .e-grid .e-icon.e-animatebutton {
  .switch-animate-icon-color;
@@ -1364,21 +1405,26 @@ color: @hover-icon-color;
     background-color: @content-bg-color;
 }
 
+
 .e-heatmap.e-grid {
-    display:block;
+    display: block;
 }
+
 .e-heatmaplegend {
-    display:block;
+    display: block;
 }
+
 .e-heatmap.e-grid .e-alt_row,
 .e-heatmap.e-grid td.e-cellselectionbackground,
 .e-heatmap.e-grid .e-headercell, .e-heatmap.e-grid .e-grouptopleftcell {
     background: white;
 }
+
 .e-heatmap.e-js.e-grid .e-headercelldiv {
     font-weight: 600;
-	font-size: 12px;
+    font-size: 12px;
 }
+
 .e-heatmap.e-js.e-grid.e-responsive .e-rowcell {
     font-size: 12px;
 }
@@ -1391,6 +1437,10 @@ color: @hover-icon-color;
 .e-heatmap.e-js.e-grid.e-responsive .e-alt_row td:first-child {
     font-weight: 600;
     font-size: 12px;
+}
+
+.e-heatmap.e-js.e-grid .e-gridheader {
+    border-bottom-width: 1px;
 }
 
 .e-heatmap.e-js.e-grid,
@@ -1408,9 +1458,37 @@ color: @hover-icon-color;
     border-color: @hmp-border-color;
 }
 
-    .e-heatmap.e-js.e-grid.e-responsive .e-rowcell {
-        border-bottom: none;
-    }
+.e-heatmap.e-js.e-grid.e-responsive .e-rowcell {
+    border-bottom: none;
+}
+
+.e-heatmaplegend.e-js .sf-ht-label,
+.e-heatmap.e-js.e-grid .e-rowcell.sf-ht-heatmapcell,
+.e-heatmap.e-js.e-grid .e-headercelldiv {
+    color: @hmp-font-color;
+}
+
+.e-heatmap.e-js.e-grid .e-alt_row,
+.e-heatmap.e-js.e-grid .e-row,
+.e-heatmap.e-js.e-grid .e-headercell.e-default.e-headertemplate,
+.e-heatmap.e-js.e-grid .e-cellselectionbackground .e-activecell,
+.e-heatmap.e-grid td.e-cellselectionbackground {
+    background-color: @hmp-background-color;
+}
+
+.e-heatmaplegend.e-js .sf-ht-label,
+.e-heatmap.e-js.e-grid .e-rowcell.sf-ht-heatmapcell,
+.e-heatmap.e-js.e-grid .e-headercelldiv {
+    color: @hmp-font-color;
+}
+
+.e-heatmap.e-js.e-grid .e-alt_row,
+.e-heatmap.e-js.e-grid .e-row,
+.e-heatmap.e-js.e-grid .e-headercell.e-default.e-headertemplate,
+.e-heatmap.e-js.e-grid .e-cellselectionbackground .e-activecell,
+.e-heatmap.e-grid td.e-cellselectionbackground {
+    background-color: @hmp-background-color;
+}
 
 
 
@@ -1439,8 +1517,7 @@ color: @hover-icon-color;
 }
 .e-excelfilter.e-dlgcontainer,
 .e-excelfilter.e-dlgcustom .e-fieldset,
-.e-excelfilter .e-menu.e-vertical .e-list > ul,
-.e-excelfilter .e-btncontainer input {
+.e-excelfilter .e-menu.e-vertical .e-list > ul{
     border-width: @border-size;
     border-style: @border-type;
     border-color: @scroll-bg-color;
@@ -1463,8 +1540,8 @@ color: @hover-icon-color;
 .e-excelfilter .e-select:hover .e-icon{
 color: @hover-icon-color;
 }
-.e-excelfilter.e-dlgcustom input {
-line-height: normal;
+.e-excelfilter.e-dlgcustom .e-input{
+line-height: 1.7em;
 }
 .e-excelfilter{
     -moz-user-select: none;
@@ -2522,16 +2599,34 @@ color:#5c5c5c;
 
 
 /*------------------------------------- Common -------------------------------------------*/
-.ejinputtext, .e-textbox {
+.ejinputtext, .e-textbox, .e-textarea {
     background-color: @content-bg-color;
     border: 1px solid @content-border-color;
     color: @content-font-color;
     outline: medium none;
 }
 
-.ejinputtext:focus, .e-textbox:focus {
+.ejinputtext:focus, .e-textbox:focus, .e-textarea:focus {
     box-shadow: 0 0 @shadow-bg-size @shadow-bg-color;
     .material-normal-box-shadow;
+}
+
+.e-textbox:focus, .e-textarea:focus {
+    .focus-border-color();
+}
+
+.e-textbox:hover, .e-textarea:hover {
+    .focus-border-color();
+}
+
+.e-textbox[disabled], .e-textarea[disabled] {
+    box-shadow: none;
+    color: fade(@content-font-color,38%);
+}
+
+.e-textbox[disabled]:hover, .e-textarea[disabled]:hover, .e-textbox[disabled]:focus, .e-textarea[disabled]:focus {
+    border-color: @content-border-color;
+    box-shadow: none;
 }
 
 .e-split {
@@ -2749,7 +2844,7 @@ color:#5c5c5c;
     .material-stylefor-bordertop();
 }
 
-.e-fileexplorer input, .e-fileexplorer .e-treeview .e-text,
+.e-fileexplorer input,
 .e-fileexplorer .e-grid .e-headercelldiv, .e-fileexplorer .e-grid .e-gridcontent tr,
 .e-fileexplorer .e-tileview .e-tilenode .e-name, input.e-fe-dialog-text,
 .e-fe-toolbar.e-responsive-toolbar input
@@ -2802,11 +2897,6 @@ color:#5c5c5c;
 .e-fileexplorer.e-js .e-statusbar .e-active .e-icon
 {
     color: @active-bg-stcolor;
-}
-
-.e-fileexplorer.e-js .e-treeview .e-text.e-active
-{
-    color: @active-font-color;
 }
 
 .e-fileexplorer.e-js .e-treeview .e-text:hover,
@@ -3468,8 +3558,198 @@ color:#5c5c5c;
 
 
 
+/*------------DateRangePicker themes -------------*/
+
+.e-daterangepicker-popup {
+    border: 1px solid @content-border-color;
+    background-color: @content-bg-color;
+    font-family: @font-family;
+    font-weight: @content-font-weight;
+    color: @content-font-color;
+}
+.e-daterangewidget .e-input  {
+	background-color: @content-bg-color;
+    font-family: @font-family;
+    font-weight: @content-font-weight;
+    color: @content-font-color;
+}
+.e-daterangewidget .e-in-wrap, .e-daterangepicker-popup {
+    border-color: @content-border-color;
+}
+
+.e-daterangewidget.e-widget:hover .e-in-wrap {
+    .material-normal-box-shadow;
+    .focus-border-color();
+}
+
+.e-daterangewidget.e-focus .e-in-wrap, .e-daterangewidget .e-focus {
+    box-shadow: 0 0 @shadow-bg-size @bs-shadow-bg-color;
+    .material-normal-box-shadow;
+}
+
+.e-daterangewidget.e-focus .e-in-wrap, .e-daterangewidget .e-focus .e-in-wrap {
+    .focus-border-color();
+}
+
+.e-daterangewidget .e-select,
+.e-daterangewidget .e-drpbuttons .e-disable:hover,
+.e-ntouch.e-daterangewidget .e-disable.e-select:hover {
+    .bs-default-gradient();
+    background-color: @content-bg-color;
+    border-color: @content-border-color;
+    color: @default-icon-color;
+    .border-selection();
+}
+
+.e-daterangewidget .e-select,
+.e-ntouch.e-daterangewidget .e-disable.e-select:hover {
+    .office-button-bg-color();
+}
+
+.e-ntouch.e-daterangewidget .e-select:hover {
+    .hover-gradient();
+    color: @hover-icon-color;
+}
+
+.e-daterangepicker-popup .e-custom-dateranges {
+    border-left: 1px solid @content-border-color;
+}
+
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-start-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.today.e-start-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-active.e-start-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-start-date:hover,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-active.e-start-date:hover,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-state-hover.e-start-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-end-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.today.e-end-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-active.e-end-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-state-hover.e-end-date,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.in-range.e-end-date {
+    .active-gradient();
+    color: @active-font-color;
+}
+
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default:hover,
+.e-daterangepicker-popup .e-ntouch.e-datepicker table td.e-state-default:hover {
+    background: @content-bg-color;
+    color: @active-bg-stcolor;
+    font-weight: @header-font-weight;
+}
+
+.e-daterangepicker-popup .e-val-error .e-in-wrap {
+    border: 1px solid red;
+}
+
+.e-daterangepicker-popup .e-drpbuttons .e-drp-apply.e-disable {
+    cursor: default;
+}
+
+
+
+
+.e-custom-dateranges li {
+    box-shadow: 0 0 5px @default-bg-stcolor;
+    background: @content-bg-color;
+    border: 1px solid @content-border-color;
+}
+
+.e-custom-dateranges li.e-active {
+    .active-gradient();
+    border-color: @active-border-color;
+    color: @active-font-color;
+    border-color: @active-border-color;
+}
+
+.e-custom-dateranges li:hover {
+    .hover-gradient();
+    color: @hover-font-color;
+    border-color: @hover-border-color;
+}
+
+.e-daterange-responsive .e-custom-dateranges {
+    border-top: 1px solid @content-border-color;
+}
+
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.in-range.e-active,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-active,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.in-range.e-state-hover,
+.e-daterangepicker-popup .e-ntouch.e-datepicker .e-datepicker-days .e-state-default.in-range:hover {
+.high-contrast-stylefor-daterange();
+    background: @default-bg-stcolor;
+}
+
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-state-hover,
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.today {
+    background: @content-bg-color;
+    color: @content-font-color;
+}
+
+.e-daterangepicker-popup .e-custom-dateranges li:hover {
+    .hover-gradient();
+    background-color: #179bd7;
+    color: @hover-font-color;
+}
+
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.in-range + .e-end-date {
+.high-contrast-stylefor-daterange();
+    box-shadow: -12px 0 0 0 @default-bg-stcolor;
+}
+
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-start-date.showrange {
+.high-contrast-stylefor-daterange();
+
+    box-shadow: 12px 0 0 0 @default-bg-stcolor;
+}
+
+.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.in-range {
+
+    color: @default-font-color;
+.high-contrast-stylefor-daterange();
+    background: @default-bg-stcolor;
+    border-color: @content-border-color;
+    box-shadow: 0 0 0 transparent inset;
+}
+/*button css*/
+.e-daterangepicker-popup .e-drpbuttons {
+    border-top: 1px solid @default-border-color;
+    .bs-default-gradient();
+    border-color: @default-border-color;
+    .switch-datetimepick-button-text;
+    color: @default-font-color;
+}
+
+.e-daterangepicker-popup .e-drpbuttons div {
+    .bs-default-gradient();
+    color: @default-font-color;
+    border-color: @default-border-color;
+}
+
+.e-daterangepicker-popup .e-drpbuttons div:hover {
+    .hover-gradient();
+    color: @hover-font-color;
+    border-color: @hover-border-color;
+}
+
+.e-daterangepicker-popup .e-drpbuttons .e-active {
+    .active-gradient();
+    border-color: @active-border-color;
+    color: @content-font-color;
+    border-color: @active-border-color;
+}
+
+.e-daterangepicker-popup .e-datewidget.e-error .e-in-wrap {
+    border-color: @content-border-color;
+}
+
+.e-daterangepicker-popup .e-datewidget.e-error {
+    color: white;
+}
+
+
+
 .svg-rotate-ie {
-     cursor: url("../common-images/Rotate.cur"), default;
+  cursor: url("../common-images/Rotate.cur"), default;
     }
 .svg-rotate {
      cursor: url("../common-images/Rotate.cur"), default;
@@ -4021,7 +4301,20 @@ color:#5c5c5c;
     .focus-border-color();
 }
 
-.e-numeric .e-in-wrap , .e-percent .e-in-wrap ,
+.e-numeric.e-disable-wrap:hover .e-in-wrap, .e-percent.e-disable-wrap:hover .e-in-wrap,
+.e-currency.e-disable-wrap:hover .e-in-wrap, .e-mask.e-disable-wrap:hover .e-in-wrap
+{
+    border-color: @content-border-color;
+	box-shadow: none;
+}
+
+.e-numeric.e-disable-wrap:hover .e-in-wrap input.e-input, .e-percent.e-disable-wrap:hover .e-in-wrap input.e-input,
+.e-currency.e-disable-wrap:hover .e-in-wrap input.e-input, .e-mask.e-disable-wrap:hover .e-in-wrap input.e-input
+{
+    box-shadow: none;
+}
+
+.e-numeric .e-in-wrap , .e-percent .e-in-wrap,
 .e-currency .e-in-wrap, .e-mask .e-in-wrap
 {
     border-color: @content-border-color;
@@ -4321,6 +4614,16 @@ color:#5c5c5c;
 .e-menu.e-vertical .e-active > .e-menulink,.e-menu-res-wrap .e-menu-res-in-wrap .e-icon.e-check-wrap:hover
 {
      .material-menu-active-bg-color;
+}
+.e-menu-res-wrap .e-menu-res-in-wrap .e-icon.e-check-wrap:hover {
+    .hover-gradient();
+     color: @active-font-color;
+     border-color: @hover-bg-stcolor;
+}
+.e-menu-res-wrap .e-menu-res-in-wrap .e-icon.e-check-wrap:active {
+    .active-gradient();
+     color: @active-font-color;
+     border-color: @hover-bg-stcolor;
 }
 
 
@@ -4738,7 +5041,7 @@ background-image:url(images/rotator-icon.png);
 .e-tab.e-js > .e-header,.e-tab.e-js .e-header > .e-select.e-disable:hover,.e-tab.e-js > .e-left,.e-tab.e-js > .e-right,.e-tab.e-disable .e-select:hover
 {
     .header-gradient();   
-    border: none;
+    .office-tab-border-left-right;   
 }
 
 .e-tab.e-js > .e-header, .e-tab.e-js .e-header > .e-select.e-disable:hover, .e-tab.e-js > .e-left, .e-tab.e-js > .e-right, .e-tab.e-disable .e-select:hover {
@@ -4764,12 +5067,12 @@ background-image:url(images/rotator-icon.png);
 }
 .e-tab.e-js .e-left .e-item.e-active,.e-tab.e-js .e-left .e-item.e-active:hover{
   margin-right: -1px; 
-  border-right: transparent ;
+  .material-tab-left-border; 
    outline:0 none;
 }
 .e-tab.e-js .e-right .e-item.e-active,.e-tab.e-js .e-right .e-item.e-active:hover{
   margin-left: -1px; 
-  border-left: transparent;
+  .material-tab-right-border;
    outline:0 none;
 }
 .e-scrolltab.e-js .e-header>.e-bottom-line.e-item.e-active,.e-scrolltab.e-js .e-header>.e-bottom-line.e-item.e-active:hover {
@@ -4789,7 +5092,7 @@ background-image:url(images/rotator-icon.png);
 }
 .e-tab.e-js .e-header > .e-top-line.e-active,.e-tab.e-js .e-header > .e-top-line.e-active:hover{
    padding-top:1px;
-   border-top: transparent ;
+   .material-tab-bottom-border; 
    outline:0 none;
    
 }
@@ -4918,13 +5221,13 @@ border-bottom: @border-size @border-type @tab-background-color;
     .material-tab-borderbottom();
 }
 .e-tab .e-header.e-addbordertop .e-active {
-    border-bottom:3px @border-type @active-bg-stcolor;
+    .material-tab-bottom-border-bottom; 
 }
 .e-tab .e-right.e-addborderright .e-active{
-    border-right:3px @border-type @active-bg-stcolor;
+    .material-tab-right-bottom-border; 
 }
 .e-tab .e-left.e-addborderleft .e-active{
-     border-left:3px @border-type @active-bg-stcolor;
+    .material-tab-left-bottom-border; 
 }
  
 
@@ -5170,6 +5473,7 @@ border-bottom: @border-size @border-type @tab-background-color;
 .e-treeview .e-text
 {
     color: @content-font-color;
+    background-color: transparent;
 }
 .e-dragedNode
 {
@@ -5181,7 +5485,7 @@ border-bottom: @border-size @border-type @tab-background-color;
     color: @active-icon-color;
     float: left;
 }
-.e-treeview .e-active
+.e-treeview .e-active, .e-fullrow-wrap .e-li-active > .e-fullrow
 {
     .active-gradient();
     color: @active-font-color;
@@ -5189,7 +5493,7 @@ border-bottom: @border-size @border-type @tab-background-color;
     border-image: initial;
 }
 .e-treeview .e-node-hover,
-.e-treeview .e-node-focus
+.e-treeview .e-node-focus, .e-fullrow-wrap .e-li-hover > .e-fullrow, .e-fullrow-wrap .e-li-focus > .e-fullrow
 {
 	.hover-gradient();
     color: @hover-font-color;
@@ -5244,6 +5548,14 @@ border-bottom: @border-size @border-type @tab-background-color;
     background-color: @default-icon-color;
     border-color: @content-bg-color;
     color: @content-bg-color;
+}
+
+.e-fullrow-wrap .e-item.e-li-active > .e-text-wrap > .e-icon {
+    color: @active-icon-color;
+}
+
+.e-fullrow-wrap .e-item.e-li-hover > .e-text-wrap > .e-icon {
+    color: @default-icon-color;
 }
 
 /*------------------------------------- Upload Box -------------------------------------------*/
@@ -5585,6 +5897,11 @@ vertical-align:baseline;
 .e-rte .e-rteItem-orderedList .e-split, .e-rte .e-rteItem-unorderedList .e-split{
     .material-rte-splitbtn-radius;
 }
+.e-responsive-toolbar .e-rte-lists.e-ul .e-rteItem-unorderedList.e-tooltxt .e-split, 
+.e-responsive-toolbar .e-rte-lists.e-ul .e-rteItem-orderedList.e-tooltxt .e-split{ 
+    height: 24px !important;
+    width: 36px !important;
+} 
 /*---------------- RTE Theme End------------------*/
 
 
@@ -5862,10 +6179,10 @@ margin-left: 34px;
 }
 
 .e-innerDecrement:hover {
-   background-image:url(../common-images/maps/Zoom-Out_hover.png);
+   background-image:url(../common-images/maps/Zoom-out_hover.png);
    }
 .e-innerDecrement {
-   background-image:url(../common-images/maps/Zoom-Out.png);
+   background-image:url(../common-images/maps/Zoom-out.png);
     height:25px;
     width:25px;    
 }
@@ -6169,7 +6486,7 @@ background-color:@hover-bg-stcolor !important;
 .e-pivotgrid .summary {
   white-space: nowrap;
   text-align: left;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 .e-pivotgrid .colheader, .e-pivotgrid .rowheader,.e-pivotgrid .calc {
   font-weight: bold;
@@ -6415,6 +6732,10 @@ content:"\e6a0";
     width: 69px;
     margin-left: 83px;
 }
+.e-pivotgrid.e-rtl .dialogOKBtn {
+  margin-left: 10px;
+  margin-right: 73px;
+}
 .e-pivotgrid .dialogCancelBtn {
     width: 69px;
     margin-left: 10px;
@@ -6427,6 +6748,14 @@ content:"\e6a0";
     font-weight: bold;
     cursor: move;
     color: @default-font-color;
+}
+.e-pivotgrid .e-treeview .e-node-hover
+{
+  .office-pivot-treeview-hover-border();
+}
+.e-pivotgrid  .e-treeview .e-active
+{
+	.office-pivot-treeview-active-color();
 }
 .e-pivotgrid .pivotButton {
 .groupingBar-btn-color();
@@ -6863,7 +7192,8 @@ content:"\e6a0";
     width:auto;
     background: @toolbar-bgcolor;
     margin: 2px 3px 0;
-    border: 1px solid @ogrid-header-border-color !important;
+    .office-pivot-button-border();
+    border-color:@ogrid-header-border-color !important;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -6897,18 +7227,27 @@ content:"\e6a0";
   text-align: right;
 }
 
+
  .e-pivotschemadesigner .pivotButton > .pvtBtnDiv:hover
 {
     .hover-gradient();
     .switch-pivotgrid-btn-hover;
-    border: 1px solid @active-font-color !important;
+    .office-pivot-button-border();
+    border-color: @active-font-color !important;
     color:  @hover-font-color;
 } 
+  .e-pivotschemadesigner .pivotButton > .pvtBtnDiv:active
+{
+      .office-pivot-button-active();
+  }
  .e-pivotschemadesigner .pvtBtnDiv > .pvtBtn:hover 
  {
      .hover-gradient();
  }
-
+  .e-pivotschemadesigner .pvtBtnDiv > .pvtBtn:active 
+{
+    .office-pivot-button-active();
+  }
  .e-pivotschemadesigner .filter, .e-pivotschemadesigner .sorting, .e-pivotschemadesigner .removeBtn
  {
      color: @default-font-color;
@@ -7065,6 +7404,7 @@ content:"\e6a0";
 {
 	/*background:@pivotList-treeview-hvr-color;*/
              /*color:@pivotList-treeview-text-hvr-color;*/
+     .office-pivot-treeview-hover-border();
 	
 }
 .e-pivotschemadesigner .e-dialog .e-header
@@ -7074,7 +7414,7 @@ content:"\e6a0";
 }
 .e-pivotschemadesigner .e-dialog .e-dialog-icon:hover
 {
-	background:@pivotList-dialog-close-hvr-color;
+    .office-pivot-dialog-icon-hover();
 }
 .e-pivotschemadesigner .e-treeview .e-active
 {
@@ -7160,7 +7500,7 @@ content:"\e6a0";
 
 .e-pivotschemadesigner .ddlGroupWrap,.e-pivotgrid .ddlGroupWrap {
     font-weight: bold;
-    padding: 10px;
+    padding:5px 0px 5px 8px;
 }
 
 .e-pivotschemadesigner .ascOrder, .e-pivotschemadesigner .descOrder,.e-pivotgrid .ascOrder, .e-pivotgrid .descOrder {
@@ -7244,8 +7584,8 @@ content:"\e6a0";
 }
 
 .e-pivotschemadesigner .advancedFilter, .e-pivotgrid .advancedFilter {
-    margin-left: 38px;
-    margin-right: 15px;
+    margin-left: 9px;
+    margin-right: 5px;
 }
 
 .e-pivotschemadesigner .activeFilter:before, .e-pivotgrid .activeFilter:before {
@@ -7262,11 +7602,11 @@ content:"\e6a0";
     margin-top: 0px;
 }
 .e-pivotschemadesigner .separator, .e-pivotgrid  .separator {
-    width: 81%;
+    width: 84%;
     height: 1px;
     background-color: @default-border-color;
     margin-top: 7px;
-    margin-left: 36px;
+    margin-left: 35px;
 }
 .e-pivotschemadesigner .filterElementTag a,.e-pivotgrid .filterElementTag a
 {
@@ -7290,6 +7630,14 @@ content:"\e6a0";
 {
     margin-left: 10px;
 }
+.e-pivotschemadesigner .memberFilter.filterState, .e-pivotgrid .memberFilter.filterState 
+{
+    margin-left : 0px!important;
+    margin-top :5px;
+    position: absolute;
+    float: left;
+}
+
 .e-pivotschemadesigner .filterDialog div,.e-pivotgrid .filterDialog div
  {
     padding-bottom: 5px;
@@ -7301,7 +7649,7 @@ content:"\e6a0";
 {
      height:20px;
 }
-.e-pivotgrid #clientDialog_wrapper .e-scroller:not([id$="_fieldCollection_container"]), .e-pivotschemadesigner #clientDialog_wrapper .e-scroller {
+.e-pivotgrid #clientDialog_wrapper.advancedFilterDlg .e-scroller:not([id$="_fieldCollection_container"]), .e-pivotschemadesigner #clientDialog_wrapper.advancedFilterDlg .e-scroller {
     overflow: visible;
     border:none;
  }
@@ -7408,7 +7756,13 @@ color:@oclient-treeview-text-hover;
 color:@active-font-color;
 background:@oclient-treeview-active;
 }
+.e-pivotclient .e-splitter .e-splitbar.e-h-bar{
+width:4px;
+}
 
+.e-pivotclient .e-pane{
+overflow:initial;
+}
  .e-olapclient .nextPageDiv {
     float: right;
     margin-top: 10px;
@@ -7476,13 +7830,9 @@ font-size: 20px;
 content:"\e6d0";
 font-size: 20px;  
 }
-.e-pivotclient .saveReportImg:before{
-    content:"\e6b7";
-	font-size: 20px;  
-}
-.e-pivotclient .loadReportImg:before{
-content:"\e6ce";
-font-size: 20px;  
+.e-pivotclient .reportDBImg:before {
+  content: "\e839";
+  font-size: 20px;
 }
 .e-pivotclient .mdxImg:before {
 	content:"\e6ac";
@@ -7512,8 +7862,8 @@ font-size: 20px;
      content: "\e790";
      font-size: 20px;
 }
-.e-pivotclient .newReportImg,.e-pivotclient .addReportImg,.e-pivotclient .removeReportImg,.e-pivotclient .renameReportImg,.e-pivotclient .saveReportImg,
-.e-pivotclient .loadReportImg,.e-pivotclient .mdxImg,.e-pivotclient .maximizedView,.e-pivotclient .excelExportImg,.e-pivotclient .wordExportImg,.e-pivotclient .pdfExportImg,.e-pivotclient .chartTypesImg,.e-pivotclient .rowSortFilterImg,.e-pivotclient .colSortFilterImg,.e-pivotclient .toggleExpandButton,
+.e-pivotclient .newReportImg,.e-pivotclient .addReportImg,.e-pivotclient .removeReportImg,.e-pivotclient .renameReportImg,
+.e-pivotclient .reportDBImg, .e-pivotclient .mdxImg,.e-pivotclient .maximizedView,.e-pivotclient .excelExportImg,.e-pivotclient .wordExportImg,.e-pivotclient .pdfExportImg,.e-pivotclient .chartTypesImg,.e-pivotclient .rowSortFilterImg,.e-pivotclient .colSortFilterImg,.e-pivotclient .toggleExpandButton,
 .e-pivotclient .toggleCollapseButton,.e-pivotclient .dimensionCDB,.e-pivotclient .folderCDB,.e-pivotclient .hierarchyCDB,.e-pivotclient .attributeCDB,.e-pivotclient .chartCDB,
 .e-pivotclient .namedSetCDB,.e-pivotclient .level0,.e-pivotclient .level1,.e-pivotclient .level2,.e-pivotclient .level3,.e-pivotclient .level4,.e-pivotclient .level5,
 .e-pivotclient .level6,.e-pivotclient .level7,.e-pivotclient .level8,.e-pivotclient .level9,.e-pivotclient .level10, 
@@ -7579,6 +7929,18 @@ font-size: 20px;
 content:"\e671";
 font-size: 20px;
     margin-right: 7px;
+}
+.e-pivotclient .e-pivotschemadesigner .fieldTable
+{
+    background: @bg-table-color !important;
+    border-collapse: collapse !important;
+    margin: 10px 0px 8px !important;
+}
+.e-pivotclient .e-pivotschemadesigner .fieldEnSplitTable{
+margin: 10px 0px 8px !important;
+}
+.e-pivotclient .e-pivotschemadesigner .fieldDisSplitTable{
+margin: 6px 10px 8px !important;
 }
 
 .e-pivotclient .toggleText{
@@ -7659,8 +8021,8 @@ background:@toolbar-bgcolor;
 .e-pivotclient .reportToolbar .e-active {
   color: @active-font-color;
 }
-.e-pivotclient .connectImg, .e-pivotclient .newReportImg, .e-pivotclient .addReportImg, .e-pivotclient .removeReportImg, .e-pivotclient .renameReportImg, .e-pivotclient .saveReportImg, .e-pivotclient .loadReportImg,.e-pivotclient .mdxImg,.e-pivotclient .maximizedView, .e-pivotclient .excelExportImg, .e-pivotclient .wordExportImg, .e-pivotclient .pdfExportImg, .e-pivotclient .chartTypesImg, .e-pivotclient .rowSortFilterImg, .e-pivotclient .colSortFilterImg, .e-pivotclient .connectImg:hover, .e-pivotclient .newReportImg:hover, .e-pivotclient .addReportImg:hover, .e-pivotclient .removeReportImg:hover, 
-.e-pivotclient .renameReportImg:hover, .e-pivotclient .saveReportImg:hover, .e-pivotclient .loadReportImg:hover,.e-pivotclient .mdxImg:hover, .e-pivotclient .excelExportImg:hover, .e-pivotclient .wordExportImg:hover, .e-pivotclient .pdfExportImg:hover, .e-pivotclient .chartTypesImg:hover,
+.e-pivotclient .connectImg, .e-pivotclient .newReportImg, .e-pivotclient .addReportImg, .e-pivotclient .removeReportImg, .e-pivotclient .renameReportImg, .e-pivotclient .reportDBImg, .e-pivotclient .mdxImg,.e-pivotclient .maximizedView, .e-pivotclient .excelExportImg, .e-pivotclient .wordExportImg, .e-pivotclient .pdfExportImg, .e-pivotclient .chartTypesImg, .e-pivotclient .rowSortFilterImg, .e-pivotclient .colSortFilterImg, .e-pivotclient .connectImg:hover, .e-pivotclient .newReportImg:hover, .e-pivotclient .addReportImg:hover, .e-pivotclient .removeReportImg:hover, 
+.e-pivotclient .renameReportImg:hover, .e-pivotclient .reportDBImg:hover, .e-pivotclient .mdxImg:hover, .e-pivotclient .excelExportImg:hover, .e-pivotclient .wordExportImg:hover, .e-pivotclient .pdfExportImg:hover, .e-pivotclient .chartTypesImg:hover,
 .e-pivotclient .rowSortFilterImg:hover, .e-pivotclient .colSortFilterImg:hover,.e-pivotclient .autoExecuteImg:hover,.e-pivotclient .autoExecuteImg,.e-pivotclient .toggleaxisImg,.e-pivotclient .toggleaxisImg:hover{
     background-repeat: no-repeat;
     margin: 4px;
@@ -7669,7 +8031,7 @@ background:@toolbar-bgcolor;
 	height: 20px; 
 	width: 20px;
 }
-.e-pivotclient .connectImg:hover, .e-pivotclient .newReportImg:hover, .e-pivotclient .addReportImg:hover, .e-pivotclient .removeReportImg:hover, .e-pivotclient .renameReportImg:hover, .e-pivotclient .saveReportImg:hover, .e-pivotclient .loadReportImg:hover,.e-pivotclient .mdxImg:hover, .e-pivotclient .excelExportImg:hover,.e-pivotclient .wordExportImg:hover,.e-pivotclient .pdfExportImg:hover,.e-pivotclient .chartTypesImg:hover,.e-pivotclient .maximizedView:hover,.e-pivotclient .rowSortFilterImg:hover, .e-pivotclient .colSortFilterImg:hover,.e-pivotclient .autoExecuteImg:hover,.e-pivotclient .toggleaxisImg:hover { cursor: pointer;color:@toolbar-icons-hvrcolor; }
+.e-pivotclient .connectImg:hover, .e-pivotclient .newReportImg:hover, .e-pivotclient .addReportImg:hover, .e-pivotclient .removeReportImg:hover, .e-pivotclient .renameReportImg:hover, .e-pivotclient .reportDBImg:hover, .e-pivotclient .mdxImg:hover, .e-pivotclient .excelExportImg:hover,.e-pivotclient .wordExportImg:hover,.e-pivotclient .pdfExportImg:hover,.e-pivotclient .chartTypesImg:hover,.e-pivotclient .maximizedView:hover,.e-pivotclient .rowSortFilterImg:hover, .e-pivotclient .colSortFilterImg:hover,.e-pivotclient .autoExecuteImg:hover,.e-pivotclient .toggleaxisImg:hover { cursor: pointer;color:@toolbar-icons-hvrcolor; }
 .e-pivotclient .reportList{
     padding-left: 7px;
     padding-right: 7px;
@@ -7812,11 +8174,18 @@ font-size: 18px;
 .e-pivotclient .editorPara{
     margin: 0 0 7px;
 }
-.e-pivotclient .loadReportTbl{
-    margin:10px 0px 10px 0px;
+.e-pivotclient .loadReportTbl,
+.e-pivotclient .removeDBReportTbl,
+.e-pivotclient .renameDBReportTbl {
+  margin: 10px 0px 10px 0px;
 }
-.e-pivotclient .loadReportTd{
-    width:100px;
+.e-pivotclient .loadReportTd,
+.e-pivotclient .removeDBReportTd,
+.e-pivotclient .renameDBReportTd {
+  width: 100px;
+}
+.e-pivotclient table.renameDBReportTbl tr td{
+    padding:5px;
 }
 .e-pivotclient .dialogInput{
     float: right;
@@ -7845,6 +8214,22 @@ font-size:16px;
 
 .e-pivotclient .unCheckAll {
   margin-left: 5px;
+}
+
+.e-pivotclient .saveReportImg:before {
+  content: "\e6b7";
+}
+.e-pivotclient .loadReportImg:before {
+  content: "\e6ce";
+}
+.e-pivotclient .saveAsReportImg:before {
+  content: "\e83c";
+}
+.e-pivotclient .removeDBReportImg:before {
+  content: "\e83a";
+}
+.e-pivotclient .renameDBReportImg:before {
+  content: "\e83b";
 }
 
 .e-pivotclient .line:before {
@@ -7898,11 +8283,15 @@ font-size:16px;
 .e-pivotclient .bubble:before {
   content:"\e7dc";
 }
+.e-pivotclient .waterfall:before {
+  content: "\e838";
+}
 .e-pivotclient .treemap:before {
   content:"\e810";
 }
 
-.e-pivotclient .chartTypesIcon:before {
+.e-pivotclient .chartTypesIcon:before,
+.e-pivotclient .reportDBIcon:before {
   font-family: 'ej-webfont';
   font-size: 20px;
   margin-left: 2px;
@@ -7912,7 +8301,10 @@ font-size:16px;
   display: none !important;
 }        
 
-.e-pivotclient .chartTypesIcon, .e-pivotclient .chartTypesIcon:hover {
+.e-pivotclient .chartTypesIcon,
+.e-pivotclient .chartTypesIcon:hover,
+.e-pivotclient .reportDBIcon,
+.e-pivotclient .reportDBIcon:hover {
   background-repeat: no-repeat;
   margin: 5px 5px 0px 0px;
   cursor: default;
@@ -7921,7 +8313,7 @@ font-size:16px;
   width: 24px;
 }
 
-.e-pivotclient .chartTypesDialog {
+.e-pivotclient .chartTypesDialog, .e-pivotclient .reportDBDialog {
   position: absolute;
   padding: 0px 0px 5px 5px;
   z-index: 1000000;
@@ -7929,11 +8321,13 @@ font-size:16px;
 }
 
 
-.e-pivotclient .chartTypesIcon {
+.e-pivotclient .chartTypesIcon,
+.e-pivotclient .reportDBIcon {
   color: @oclient-icons-color;
 }
 
-.e-pivotclient .chartTypesIcon:hover {
+.e-pivotclient .chartTypesIcon:hover,
+.e-pivotclient .reportDBIcon:hover {
   color: @toolbar-icons-hvrcolor;
   cursor: pointer;
   background: @oclient-icons-hover-bg;
@@ -8182,7 +8576,8 @@ opacity: 1 !important;
     white-space: nowrap;
 }
  .e-pivotclient .e-pivotschemadesigner .pivotButton > .pvtBtn:hover {
-    border: 1px solid @header-border-color !important;
+    .office-pivot-button-border();
+    border-color:@header-border-color !important;
 }
 
 .e-pivotclient .e-pivotschemadesigner .removeClientPivotBtn:before {
@@ -8214,21 +8609,25 @@ opacity: 1 !important;
 .e-pivotclient .e-pivotschemadesigner .axisTd2 {
     float: left !important;
 }
-.e-pivotclient .e-pivotschemadesigner .fieldTable {
+
+.e-pivotclient .e-pivotschemadesigner .axisTable {
+    margin-top: 6px;
+}
+.e-pivotclient .e-pivotschemadesigner .addedFieldTable {
 width: 45% !important;
 margin: 6px 7px 8px 5px;
 width: 44% !important;
 }
-.e-pivotclient .e-pivotschemadesigner .axisTable {
-    margin-top: 6px;
-    width: 52% !important;
-}
+
 .e-pivotclient .e-pivotschemadesigner .clientFieldTable{
     float: right !important;
 }
+.e-pivotclient .e-pivotschemadesigner .clientAxisSplitterTable{
+      margin-left: 0px !important;
+}
 .e-pivotclient .e-pivotschemadesigner .clientAxisTable{
     width: 50% !important;
-    margin-left: 10px !important;
+    margin-left: 0px !important;
 }
 .e-pivotclient .e-pivotschemadesigner #axisTd {
     margin-top: 0px !important;
@@ -8266,7 +8665,7 @@ width: 44% !important;
     height: 16px;
     width: 16px;
 }
-.e-pivotclient #clientDialog_wrapper .e-scroller {
+.e-pivotclient #clientDialog_wrapper.advancedFilterDlg .e-scroller {
     overflow: visible!important;
     border: none;
 }
@@ -9139,6 +9538,12 @@ background-color:@hover-bg-stcolor !important;
     color:@gantt-header-font-color;
     font-family: @font-family;
 }
+.e-filterMenuDiv {
+  border-color: @filtermenudialog-color !important;
+  font-family: @font-family;
+  min-height: 0px !important;
+}
+
 .e-treegrid .e-headercelldiv .e-descending, .e-treegrid .e-headercelldiv .e-ascending ,.e-treegrid .e-headercell .e-columnmenu-icon {
     color: @header-icon-color;
 }
@@ -9164,7 +9569,9 @@ background-color:@hover-bg-stcolor !important;
 .e-treegrid .e-extendcolumn {
     border-color: @gantt-content-border-color;
 }
-
+.e-treegrid .e-tableLastCell {
+    border-right-color: @gantt-content-border-color!important;
+}
 .e-treegrid .e-detailsiconcell:hover,
 .e-treegrid .e-detailsinfoiconhide {
     background-color: @treegrid-detailicon-shadow-color;
@@ -9407,6 +9814,15 @@ background-color:@hover-bg-stcolor !important;
 .e-treegrid .e-footercontainer {
     border-right-color:@gantt-header-border-color;
 }
+.e-headervline {    
+    border-color: @active-bg-stcolor !important;   
+}
+
+.e-headertooltip {    
+    color: @gantt-header-font-color;         
+    background-color:@gantt-header-endbg-color;  
+    border-color:@gantt-header-border-color;
+}
 
 
 
@@ -9422,10 +9838,10 @@ background-color:@hover-bg-stcolor !important;
 ej-ribbon {
 	display: block;
 }
-.e-ribbon .e-button .e-btntxt{
+.e-ribbon .e-rbn-button.e-button .e-btntxt{
     white-space:pre-wrap;
 }
-.e-ribbon .e-btn.e-select:focus {
+.e-ribbon .e-rbn-button.e-btn.e-select:focus {
     box-shadow:none;
 }
 .e-ribbon .e-groupdiv > div:after {
@@ -9443,13 +9859,13 @@ ej-ribbon {
 	border-top-width:0;
 	color:@content-font-color;
 }
-.e-ribbon .e-ddl .e-select{
+.e-ribbon .e-rbn-ddl.e-ddl .e-select{
    background: @rbndropdown-color;
    border-color: @content-border-color;
    color: @default-icon-color;
    filter:none;
 }
-.e-ribbon .e-ddl .e-select:hover{
+.e-ribbon .e-rbn-ddl.e-ddl .e-select:hover{
     .ribbon-hover-gradient();
 	color: @hover-icon-color;
 }
@@ -9537,7 +9953,7 @@ ej-ribbon {
     .high-contrast-ribbon-header-active;
     background:@rbncontent-content-bg-color;
 }
-.e-ribbon .e-btn.e-select,.e-ribbon .e-btn.e-disable.e-select:hover,.e-ribbon .e-tbtn.e-disable{
+.e-ribbon .e-rbn-button.e-btn.e-select,.e-ribbon .e-rbn-button.e-btn.e-disable.e-select:hover,.e-ribbon .e-rbn-button.e-tbtn.e-disable{
     background: @rbncontent-content-bg-color;
     border-color: @rbncontent-content-bg-color;
     color: @default-font-color;
@@ -9551,22 +9967,22 @@ ej-ribbon {
 }
 
 .e-resizegroupdiv.e-reshover,
-.e-resizegroupdiv.e-reshover .e-resizebtn,
+.e-resizegroupdiv.e-reshover .e-rbn-button.e-resizebtn,
 .e-ribbon.e-responsive .e-backstageli:hover, 
 .e-ribbon.e-responsive .e-responsivetabli:hover,
-.e-ribbon.e-js .e-btn.e-select:hover{
+.e-ribbon.e-js .e-rbn-button.e-btn.e-select:hover{
    .ribbon-hover-gradient();
    color: @rbnhover-font-color;
 }
-.e-ribbon .e-btn.e-select:active ,.e-ribbon .e-btn.e-disable.e-active.e-select:hover,.e-ribbon .e-tbtn.e-active
+.e-ribbon .e-rbn-button.e-btn.e-select:active ,.e-ribbon .e-rbn-button.e-btn.e-disable.e-active.e-select:hover,.e-ribbon .e-rbn-button.e-tbtn.e-active
 {
     .ribbon-toggle-gradient();
     color:  @rbnhover-font-color;
 }
-.e-ribbon .e-btn.e-select:active .e-icon,.e-ribbon .e-btn.e-active .e-icon,.e-ribbon .e-btn.e-select:hover .e-icon{
+.e-ribbon .e-rbn-button.e-btn.e-select:active .e-icon,.e-ribbon .e-rbn-button.e-btn.e-active .e-icon,.e-ribbon .e-rbn-button.e-btn.e-select:hover .e-icon{
   color:  @rbnhover-font-color;
 }
-.e-ribbon .e-tbtn.e-active.e-disable {
+.e-ribbon .e-rbn-button.e-tbtn.e-active.e-disable {
   background: none;
 }
 .e-ribbon.e-js .e-header .e-apptab .e-menu >.e-list:nth-child(1):not(.e-active) > a:hover,.e-ribbon.e-js .e-header .e-apptab .e-menu >li:nth-child(1):not(.e-active) > a:hover span{
@@ -9604,12 +10020,12 @@ ej-ribbon {
 .e-ribbon .e-resizediv .e-moveupdiv,.e-ribbon .e-resizediv .e-movedowndiv,.e-ribbon .e-resizediv .e-expgallerydiv{
  border-color:@rbncontent-border-color;
  }
-.e-ribbon .e-groupdiv .e-gallerybtn,.e-ribbon .e-resizediv .e-gallerybtn
+.e-ribbon .e-groupdiv .e-rbn-button.e-gallerybtn,.e-ribbon .e-resizediv .e-rbn-button.e-gallerybtn
 {
   background:@rbngallery-bg-color;
   border-color:@rbngallery-bg-color;
 }
-.e-ribbon .e-groupdiv .e-galleryextrabtn,.e-ribbon .e-resizediv .e-galleryextrabtn,
+.e-ribbon .e-groupdiv .e-rbn-button.e-galleryextrabtn,.e-ribbon .e-resizediv .e-rbn-button.e-galleryextrabtn,
 .e-ribbon.e-js .e-groupdiv .e-extracontent .e-menu,.e-ribbon.e-js .e-resizediv .e-extracontent .e-menu{
    background:@content-bg-color;
    color:@content-font-color;
@@ -9617,15 +10033,15 @@ ej-ribbon {
 .e-ribbon.e-js .e-gallerymenu a{
    color:@content-font-color;
  }
- .e-ribbon .e-groupdiv .e-galleryextrabtn:hover,.e-ribbon .e-resizediv .e-galleryextrabtn:hover{
+ .e-ribbon .e-groupdiv .e-rbn-button.e-galleryextrabtn:hover,.e-ribbon .e-resizediv .e-rbn-button.e-galleryextrabtn:hover{
   .ribbon-hover-gradient();
  }
-.e-ribbon .e-groupdiv .e-galleryselect,.e-ribbon .e-resizediv .e-galleryselect
+.e-ribbon .e-groupdiv .e-rbn-button.e-galleryselect,.e-ribbon .e-resizediv .e-rbn-button.e-galleryselect
 {
   box-shadow:none;
   border-color:@rbngallery-select-color;
 }
-.e-ribbon.e-js .e-groupdiv .e-gallerybtn:hover,.e-ribbon.e-js .e-resizediv .e-gallerybtn:hover
+.e-ribbon.e-js .e-groupdiv .e-rbn-button.e-gallerybtn:hover,.e-ribbon.e-js .e-resizediv .e-rbn-button.e-gallerybtn:hover
 {
   border-color:@rbngallery-hover-color;
   color:@rbn-text-color;
@@ -9668,17 +10084,17 @@ border-top-color:@rbncontent-border-color;
  .e-ribbon .e-groupdiv .e-disablegrymovebtn > span,.e-ribbon .e-resizediv .e-disablegrymovebtn > span{
   color:@rbngallery-disable-color;
 }
- .e-ribbon .e-btn.e-disable.e-select:hover .e-icon {
+ .e-ribbon .e-rbn-button.e-btn.e-disable.e-select:hover .e-icon {
   color: @rbn-text-color;
 }
-.e-ribbon .e-btn.e-disable.e-select:hover{
+.e-ribbon .e-rbn-button.e-btn.e-disable.e-select:hover{
 background:none;
 }
-.e-ribbon .e-ddl .e-disable.e-select:hover {
+.e-ribbon .e-rbn-ddl.e-ddl .e-disable.e-select:hover {
   background:none;
   color: @rbn-text-color;
 }
-.e-ribbon .e-tbtn.e-active.e-disable .e-icon {
+.e-ribbon .e-rbn-button.e-tbtn.e-active.e-disable .e-icon {
   color: @rbn-text-color;
 }
 .e-ribbon .e-ribbonbackstagepage{
@@ -9753,15 +10169,15 @@ background:none;
 .e-ribbon.e-rbnwithqat .e-rbnquickaccessbar,.e-ribbon.e-rbnwithqat .e-rbnquickaccessbar .e-btn{
   background:transparent;
 }
-.e-ribbon.e-js .e-tbtn.e-active,.e-ribbon.e-js .e-btn.e-resizebtnselect,.e-ribbon.e-rbnwithqat.e-js .e-tbtn.e-active{
+.e-ribbon.e-js .e-rbn-button.e-tbtn.e-active,.e-ribbon.e-js .e-rbn-button.e-btn.e-resizebtnselect,.e-ribbon.e-rbnwithqat.e-js .e-rbn-button.e-tbtn.e-active{
     .ribbon-toggle-gradient();
     color:  @rbnhover-font-color;
 }
-.e-ribbon.e-js .e-btn,.e-ribbon.e-js .e-split{
+.e-ribbon.e-js .e-rbn-button.e-btn,.e-ribbon .e-active-content.e-parentdiv .e-split,.e-ribbon .e-resizediv .e-split,.e-ribbon.e-rbnwithqat .e-rbnquickaccessbar .e-split {
   box-shadow:none;
 }
 .e-ribbon.e-responsive .e-header,
-.e-ribbon.e-responsive  .e-responsiveqat .e-btn,
+.e-ribbon.e-responsive  .e-responsiveqat .e-rbn-button.e-btn,
 .e-ribbon.e-responsive  .e-resqatScroll .e-content,
 .e-ribbon.e-responsive .e-backstagerestop
 {
@@ -9770,7 +10186,7 @@ background:none;
 .e-ribbon.e-responsive .e-icon.e-resbackstage,
 .e-ribbon.e-responsive .e-ribresmenu .e-icon,
 .e-ribbon.e-responsive .e-ribresmenu a, 
-.e-ribbon.e-responsive .e-responsiveqat .e-btn .e-icon
+.e-ribbon.e-responsive .e-responsiveqat .e-rbn-button.e-btn .e-icon
  {
      color:@active-font-color !important;
     }
@@ -9793,7 +10209,7 @@ background:none;
 .e-ribbon.e-responsive .e-groupdiv{
 border-bottom: 1px solid @content-border-color;
 }
-.e-ribbon.e-responsive .e-responsiveqat .e-btn.e-active .e-icon {
+.e-ribbon.e-responsive .e-responsiveqat .e-rbn-button.e-btn.e-active .e-icon {
      color:@header-font-color !important;
 }
 .e-ribbon.e-responsive .e-rescontent,
@@ -9824,7 +10240,12 @@ box-shadow: -1px 0 10px 0 black;
 .e-kanban-context .e-checkbox .e-checkmark {
     color: @active-bg-stcolor !important;
 }
-
+.e-kanban .e-kanbantoolbar .e-searchdiv{
+  background: @content-bg-color;
+}
+.e-kanban .e-search.e-tooltxt:hover .e-searchdiv{
+  background: @content-bg-color;
+}
 .e-kanban .e-kanbanheader.e-slheader .e-headercell, .e-kanban.e-swimlane-responsive .e-columnrow .e-rowcell {
     border-bottom: 4px solid @default-bg-stcolor;
 }
@@ -10203,41 +10624,41 @@ box-shadow: -1px 0 10px 0 black;
     color: @sscontent-color;
     border-color: @sscontent-border-color;
 }
-.e-spreadsheet .e-headercell,
-.e-spreadsheet .e-headercontent,
-.e-spreadsheet .e-rowheader {
+.e-spreadsheet .e-spreadsheetmainpanel .e-headercell,
+.e-spreadsheet .e-spreadsheetmainpanel .e-headercontent,
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowheader {
     border-color: @ssheader-border-color;
     color: @ssheader-content-color;
 }
-.e-spreadsheet .e-headercell:hover,
-.e-spreadsheet .e-rowheader:hover {
+.e-spreadsheet .e-spreadsheetmainpanel .e-headercell:hover,
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowheader:hover {
     background-color: @ssheader-select-bgcolor;
     border-color:@ssheader-hover-bordercolor;
 }
-.e-spreadsheet .e-rowheadercontent {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowheadercontent {
     border-bottom-color: @ssheader-border-color;
 }
-.e-spreadsheet .e-spreadsheetcontentcontainer {
+.e-spreadsheet .e-spreadsheetmainpanel .e-spreadsheetcontentcontainer {
     border-left-color: @ssheader-border-color;
 	background-color: @content-bg-color;
 }
-.e-spreadsheet .e-spreadsheetcolumnheader {
+.e-spreadsheet .e-spreadsheetmainpanel .e-spreadsheetcolumnheader {
     border-color: @ssheader-border-color;
 }
 .e-spreadsheet .e-spreadsheetheader {
     border-bottom-color: @ssheader-border-color;
     border-top-color: @ssheader-border-color;
 }
-.e-spreadsheet .e-spreadsheetcolumnheader {
+.e-spreadsheet .e-spreadsheetmainpanel .e-spreadsheetcolumnheader {
     border-right-color: @ssheader-border-color;
 }
-.e-spreadsheet .e-rowcell {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell {
     color: @content-font-color;
     background-color: @content-bg-color;
     border-color: @content-border-color;
 }
-.e-spreadsheet .e-spreadsheetcolumnheader,
-.e-spreadsheet .e-rowheader,
+.e-spreadsheet .e-spreadsheetmainpanel .e-spreadsheetcolumnheader,
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowheader,
 .e-spreadsheet .e-scrollcss,
 .e-spreadsheet .e-scrollrowcss {
     background-color: @ssheader-bgcolor;
@@ -10257,26 +10678,26 @@ box-shadow: -1px 0 10px 0 black;
 .e-spreadsheet .e-reSizeRowbg {
     border-top-color: @ssheader-border-color;
 }
-.e-spreadsheet .e-selected,
-.e-spreadsheet .e-ctrlselected {
+.e-spreadsheet .e-spreadsheetmainpanel .e-selected,
+.e-spreadsheet .e-spreadsheetmainpanel .e-ctrlselected {
     background: @ssheader-select-bgcolor;
 	color:@sscontent-color;
 }
-.e-spreadsheet .e-activecell {
+.e-spreadsheet .e-spreadsheetmainpanel .e-activecell {
     background-color: @content-bg-color;
 	color:@sscontent-color;
 }
-.e-spreadsheet .e-rowhighlight, .e-spreadsheet .e-colhighlight {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowhighlight, .e-spreadsheet .e-spreadsheetmainpanel .e-colhighlight {
     background-color: @ssheader-select-bgcolor;
     color: @ssfroze-highlight-color;
 }
-.e-spreadsheet .e-rowhighlight {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowhighlight {
     border-right-color: @ssfroze-highlight-color;
 }
-.e-spreadsheet .e-colhighlight {
+.e-spreadsheet .e-spreadsheetmainpanel .e-colhighlight {
     border-bottom-color: @ssfroze-highlight-color;
 }
-.e-spreadsheet .e-rowhighlight:hover, .e-spreadsheet .e-colhighlight:hover {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowhighlight:hover, .e-spreadsheet .e-spreadsheetmainpanel .e-colhighlight:hover {
     background-color: @ssheader-select-bgcolor;
     border-bottom-color: @ssfroze-highlight-color;
 }
@@ -10284,64 +10705,64 @@ box-shadow: -1px 0 10px 0 black;
     background-color: @sshover-bg-color;
 }
 /*-------------------- Borders ------------------------ */
-.e-spreadsheet td.e-bborderright,
-.e-spreadsheet td.e-bctrlborderright,
-.e-spreadsheet td.e-bcbright {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-bborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-bctrlborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-bcbright {
     border-right-color: @ssborder-bright;
 }
-.e-spreadsheet td.e-bborderbottom,
-.e-spreadsheet td.e-bctrlborderbottom,
-.e-spreadsheet td.e-bcbbottom {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-bborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-bctrlborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-bcbbottom {
     border-bottom-color: @ssborder-bright;
 }
-.e-spreadsheet td.e-rborderright,
-.e-spreadsheet td.e-rctrlborderright,
-.e-spreadsheet td.e-rcbright {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-rborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-rctrlborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-rcbright {
     border-right-color: #fc100c;
 }
-.e-spreadsheet td.e-rborderbottom,
-.e-spreadsheet td.e-rctrlborderbottom,
-.e-spreadsheet td.e-rcbbottom {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-rborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-rctrlborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-rcbbottom {
     border-bottom-color: #fc100c;
 }
-.e-spreadsheet td.e-vborderright,
-.e-spreadsheet td.e-vctrlborderright,
-.e-spreadsheet td.e-vcbright {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-vborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-vctrlborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-vcbright {
     border-right-color: #6a13ad;
 }
-.e-spreadsheet td.e-vborderbottom,
-.e-spreadsheet td.e-vctrlborderbottom,
-.e-spreadsheet td.e-vcbbottom {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-vborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-vctrlborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-vcbbottom {
     border-bottom-color: #6a13ad;
 }
-.e-spreadsheet .e-gborderright,
-.e-spreadsheet .e-gctrlborderright {
+.e-spreadsheet .e-spreadsheetmainpanel .e-gborderright,
+.e-spreadsheet .e-spreadsheetmainpanel .e-gctrlborderright {
     border-right-color: #62c435 !important;
 }
-.e-spreadsheet td.e-gborderbottom,
-.e-spreadsheet td.e-gctrlborderbottom {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-gborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-gctrlborderbottom {
     border-bottom-color: #62c435;
 }
-.e-spreadsheet td.e-pborderright,
-.e-spreadsheet td.e-pctrlborderright {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-pborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-pctrlborderright {
     border-right-color: #f411b0;
 }
-.e-spreadsheet td.e-pborderbottom,
-.e-spreadsheet td.e-pctrlborderbottom {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-pborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-pctrlborderbottom {
     border-bottom-color: #f411b0;
 }
-.e-spreadsheet td.e-oborderright,
-.e-spreadsheet td.e-octrlborderright {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-oborderright,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-octrlborderright {
     border-right-color: #e59604;
 }
-.e-spreadsheet td.e-oborderbottom,
-.e-spreadsheet td.e-octrlborderbottom {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-oborderbottom,
+.e-spreadsheet .e-spreadsheetmainpanel td.e-octrlborderbottom {
     border-bottom-color: #e59604;
 }
-.e-spreadsheet .e-thinright {
+.e-spreadsheet .e-spreadsheetmainpanel .e-thinright {
     border-right-color: @ssfroze-highlight-color;
 }
-.e-spreadsheet .e-thinbottom {
+.e-spreadsheet .e-spreadsheetmainpanel .e-thinbottom {
     border-bottom-color: @ssfroze-highlight-color;
 }
 .e-spreadsheet .e-ss-numeric .e-select .e-spin {
@@ -10402,10 +10823,10 @@ box-shadow: -1px 0 10px 0 black;
     border-left-color: @ssfroze-highlight-color;
 }
 /*--------------------- Cut and Copy ------------------------ */
-.e-spreadsheet td.e-cutright {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-cutright {
     border-right-color: @ssfroze-highlight-color;
 }
-.e-spreadsheet td.e-cutbottom {
+.e-spreadsheet .e-spreadsheetmainpanel td.e-cutbottom {
     border-bottom-color: @ssfroze-highlight-color;
 }
 .e-spreadsheet .e-blur {
@@ -10428,29 +10849,29 @@ box-shadow: -1px 0 10px 0 black;
 .e-spreadsheet .e-ss-imgvisual {
     border-color: @ssheader-border-color;
 }
-.e-spreadsheet .e-rowcell.e-redft {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell.e-redft {
     background-color: #ffc7ce;
     color: #9C0055;
 }
-.e-spreadsheet .e-rowcell.e-yellowft {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell.e-yellowft {
     background-color: #ffeb9c;
     color: #9c6500;
 }
-.e-spreadsheet .e-rowcell.e-greenft {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell.e-greenft {
     background-color: #c6efce;
     color: #006100;
 }
-.e-spreadsheet .e-rowcell.e-redf {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell.e-redf {
     background-color: #ffc7ce;
 }
-.e-spreadsheet .e-rowcell.e-redt {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell.e-redt {
     color: #9C0055;
 }
-.e-spreadsheet .e-rowcell.e-hlcell {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell.e-hlcell {
     background-color: #ffff00;
     color: #ff0000;
 }
-.e-spreadsheet .e-rowcell.e-goto-blank {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowcell.e-goto-blank {
     background-color: @sscopy-blank-bgcolor;
 }
 /*-------------------------- Formula Tab --------------------------- */
@@ -10468,35 +10889,36 @@ box-shadow: -1px 0 10px 0 black;
     color: @sscontent-color;
 }
 /*-------------Pager-------------*/
-.e-spreadsheet .e-pager .e-numericitem {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-numericitem {
     color: @sspager-font-color;
 }
-.e-spreadsheet .e-pager .e-currentitem,
-.e-spreadsheet .e-pager .e-currentitem:hover {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-currentitem,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-currentitem:hover {
     background: @ssheader-select-bgcolor;
     color: @ssfroze-highlight-color;
+    filter:none;   /* IE9 only*/
 }
-.e-spreadsheet .e-pager .e-numericitem:hover {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-numericitem:hover {
   color: @ssfroze-highlight-color;
 }
-.e-spreadsheet .e-pager {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager {
     background-color: @ssheader-bgcolor;
 }
-.e-spreadsheet .e-pager .e-prevpagedisabled,
-.e-spreadsheet  .e-pager .e-prevpage,
-.e-spreadsheet .e-pager .e-nextpage,
-.e-spreadsheet .e-pager .e-nextpagedisabled,
-.e-spreadsheet .e-pager .e-lastpagedisabled,
-.e-spreadsheet .e-pager .e-lastpage,
-.e-spreadsheet .e-pager .e-firstpage,
-.e-spreadsheet .e-pager .e-firstpagedisabled,
-.e-spreadsheet .e-pager .e-numericcontainer {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-prevpagedisabled,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-prevpage,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-nextpage,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-nextpagedisabled,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-lastpagedisabled,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-lastpage,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-firstpage,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-firstpagedisabled,
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-numericcontainer {
     background-color: @ssheader-bgcolor;
 }
-.e-spreadsheet .e-pager .e-pagercontainer {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-pagercontainer {
     background-color: @ssheader-bgcolor;
 }
-.e-spreadsheet .e-pager .e-icon:not(.e-disable):hover {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-icon:not(.e-disable):hover {
     color: @ssfroze-highlight-color;
     cursor: pointer;
 }
@@ -10516,7 +10938,7 @@ div.e-dlg-field-validation-error:before {
 .e-spreadsheet .e-hyperlinks {
     color: inherit;
 }
-.e-spreadsheet .e-pager .e-mediaforward {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-mediaforward {
     border-right-color: @content-border-color;
 }
 .e-spreadsheet .e-formulabar {
@@ -10663,7 +11085,7 @@ div.e-dlg-field-validation-error:before {
 .e-spreadsheet .e-split.e-active .e-box .e-btn .e-icon, .e-spreadsheet .e-split .e-btn.e-select:active .e-icon{
     color: @ssactive-icon-color;
 }
-.e-spreadsheet .e-hborder {
+.e-spreadsheet .e-spreadsheetmainpanel .e-hborder {
     border-color: transparent;
 }
 .e-spreadsheet .e-content.e-viewbrdr {
@@ -10713,19 +11135,19 @@ div.e-dlg-field-validation-error:before {
    background-color:@ssheader-bgcolor;
    color:@ssheader-content-color;
 }
-.e-spreadsheet .e-pager .e-numericitem:not(.e-currentitem) {
+.e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-numericitem:not(.e-currentitem) {
    background-color:@ssheader-bgcolor;
 }
 .e-spreadsheet .e-ribbon .e-btn.e-select.e-disable:hover .e-icon {
    color:@ss-icon-color;
 }
-.e-spreadsheet .e-rowheader.e-filterhiglight, .e-spreadsheet .e-rowheader.e-rowhighlight.e-filterhiglight {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowheader.e-filterhiglight, .e-spreadsheet .e-spreadsheetmainpanel .e-rowheader.e-rowhighlight.e-filterhiglight {
    color:#00cc00;
 }
-.e-spreadsheet .e-headercell {
+.e-spreadsheet .e-spreadsheetmainpanel .e-headercell {
         cursor:@ssdown-arrow-cursor;
     }
-.e-spreadsheet .e-rowheader {
+.e-spreadsheet .e-spreadsheetmainpanel .e-rowheader {
         cursor:@ssright-arrow-cursor;
     }
 .e-ss-fpcursor {
@@ -10766,6 +11188,14 @@ div.e-dlg-field-validation-error:before {
 	background-color: @content-bg-color;
 	border-color: @header-border-color;
 }
+/*---------------------------Pivot Table-------------------------------*/
+.e-spreadsheet .e-ss-pivottableheader {
+     background-color: @ssheader-select-bgcolor;
+     border-color: @ssheader-border-color;
+    color: @ssheader-content-color;
+
+}
+
 /*-------------------------------------SpreadSheet End -----------------------*/
 
 

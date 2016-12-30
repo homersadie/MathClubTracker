@@ -47,7 +47,6 @@ namespace MathClubTracker.NHibernate
             if (_session == null)
                 throw new InvalidOperationException("Session has not been initialized.");
             _transaction = _session.BeginTransaction();
-            int x = 2;
         }
 
         private void CloseTransaction()

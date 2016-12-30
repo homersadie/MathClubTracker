@@ -144,9 +144,19 @@ namespace MathClubTracker.NHibernate.Services
             return true;
         }
 
-        public StudentDTO GetById(int id)
+        public StudentDTO GetByMathGeniusId(int id)
         {
             Student s = studentRepo.GetByMathGeniusId(id);
+            if (s == null)
+            {
+                return null;
+            }
+            return StudentDTO.GetStudentDTOFromStudent(s);
+        }
+
+        public StudentDTO GetById(int id)
+        {
+            Student s = studentRepo.Get(id);
             if (s == null)
             {
                 return null;

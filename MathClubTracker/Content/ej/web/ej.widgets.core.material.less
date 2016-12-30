@@ -34,13 +34,14 @@
 @slider-bs-border-radius: 12px;
 @treeview-text-padding: .308em .6667em .4167em .5833em;
 @treeview-edit-text-padding: 0 0 0 .5833em;
+@treeview-rtl-edit-text-padding: 0 .5833em 0 0;
 @treeview-ul-padding: 2px 0px 0px 10px;
 @treeview-icon-margin: 10px;
-@treeview-icon-height: 21px;
 @treeview-rtl-item-padding: 0px 16px 2px 0px;
 @treeview-rtl-ul-padding: 2px 10px 0px 0px;
 @treeview-ul-margin-bottom: -2px;
 @treeview-chk-margin-top: 4px;
+@treeview-fullrow-height: 31px;
 @rte-ul-margin-buttom: 5px;
 @rte-ul-margin-top: 6px;
 @rte-split-height: 34px;
@@ -98,19 +99,21 @@
         .e-acrdn-scroller, .e-acrdn .e-select,
         .e-chkbox-wrap div > span,
         .e-datepicker.e-popup, .e-datewidget .e-in-wrap, .e-datewidget .e-in-wrap .e-input,
+		.e-daterangepicker-popup.e-popup, .e-daterangewidget .e-in-wrap, .e-daterangewidget .e-in-wrap .e-input,
+		.e-daterangepicker-popup.e-popup, .e-drpbuttons,.e-daterangepicker-popup.e-popup .e-custom-dateranges li,
         .e-datetime-popup.e-popup, .e-datetime-popup .e-dt-button, .e-datetime-wrap .e-in-wrap, .e-datetime-wrap .e-in-wrap .e-input,
         .e-dialog-wrap, .e-dialog-wrap > .e-header .e-dialog-icon,
         .e-ddl-popup.e-popup, .e-ddl .e-in-wrap, .e-ddl .e-in-wrap .e-input,
         .e-numeric .e-in-wrap, .e-numeric .e-in-wrap .e-input,
         .e-percent .e-in-wrap, .e-percent .e-in-wrap .e-input,
         .e-currency .e-in-wrap, .e-currency .e-in-wrap .e-input,
-        .e-mask .e-in-wrap, .e-mask .e-in-wrap .e-input, .e-textbox,
+        .e-mask .e-in-wrap, .e-mask .e-in-wrap .e-input, .e-textbox, .e-textarea,
         .e-menu,
         .e-tab,
         .e-time-popup.e-popup, .e-timewidget .e-in-wrap, .e-timewidget .e-in-wrap .e-input,
         .e-toolbar, .e-toolbar .e-tooltxt,
         .e-upload-box .e-selectpart, .e-upload-box .e-btn,
-        .e-treeview .e-text,
+        .e-treeview .e-text, .e-fullrow-wrap .e-fullrow,
         .e-splitbutton,
         .e-fileexplorer .e-tilenode,
         .e-rte, .e-rte.e-dialog .e-inputtext,
@@ -266,6 +269,7 @@
     }
 
     .e-atc.e-rtl .e-corner.e-in-wrap.e-padding .e-input, .e-atc .e-corner.e-in-wrap.e-padding .e-select,
+	.e-daterangewidget.e-rtl .e-corner.e-in-wrap.e-padding .e-input,.e-daterangewidget .e-corner.e-in-wrap.e-padding .e-select,
     .e-datewidget.e-rtl .e-corner.e-in-wrap.e-padding .e-input, .e-datewidget .e-corner.e-in-wrap.e-padding .e-select,
     .e-datetime-wrap.e-rtl .e-corner.e-in-wrap.e-padding .e-input, .e-datetime-wrap .e-corner.e-in-wrap.e-padding .e-select,
     .e-ddl.e-rtl .e-corner.e-in-wrap .e-input, .e-ddl .e-corner.e-in-wrap .e-select,
@@ -278,6 +282,7 @@
 
     .e-atc .e-corner.e-in-wrap.e-padding .e-input, .e-atc.e-rtl .e-corner.e-in-wrap.e-padding .e-select,
     .e-datewidget .e-corner.e-in-wrap.e-padding .e-input, .e-datewidget.e-rtl .e-corner.e-in-wrap.e-padding .e-select,
+	.e-daterangewidget .e-corner.e-in-wrap.e-padding .e-input,.e-daterangewidget .e-corner.e-in-wrap.e-padding .e-input,
     .e-datetime-wrap .e-corner.e-in-wrap.e-padding .e-input, .e-datetime-wrap.e-rtl .e-corner.e-in-wrap.e-padding .e-select,
     .e-ddl .e-corner.e-in-wrap .e-input, .e-ddl.e-rtl .e-corner.e-in-wrap .e-select,
     .e-numeric .e-corner.e-in-wrap.e-padding .e-input, .e-numeric.e-rtl .e-corner.e-in-wrap.e-padding .e-select,
@@ -337,7 +342,7 @@
 
     .e-input, .e-tooltipbox, .e-btn, .e-time-popup, .e-datepicker.e-calendar, .e-menu, .e-uploadbox .e-file-name-txt, .e-uploadbox .e-selectpart,
     .e-uploadbox .e-uploadbtn, .e-waitpopup-pane .e-text, .e-tagcloud, .e-toolbar, .e-progressbar, .e-scale .e-tick .tick-value, .e-datetime-popup .e-dt-button, .e-grid, .e-ejinputtext, .e-pager,
-    .e-fileexplorer, .e-textbox {
+    .e-fileexplorer, .e-textbox, .e-textarea {
         font-family: @font-family;
         font-size: @font-size;
     }
@@ -373,7 +378,7 @@
         line-height: 1.908em\9;
     }
 
-    .e-rtl input.e-input, .e-rtl input[type="text"].e-input, .e-rtl .e-input.e-placeholder, .e-textbox.e-rtl {
+    .e-rtl input.e-input, .e-rtl input[type="text"].e-input, .e-rtl .e-input.e-placeholder, .e-textbox.e-rtl, .e-textarea.e-rtl {
         text-align: right;
         padding-left: 0;
         padding-right: 0.857em;
@@ -397,7 +402,7 @@
         box-sizing: content-box; /* Opera/IE 8+ */
     }
 
-    .e-widget.e-box, .e-widget .e-box, .e-widget button.e-btn, button.e-btn.e-widget, input.e-btn.e-widget, input.e-input, input[type="text"].e-input, .e-input.e-placeholder, .e-widget input.e-input, .e-lv.e-js .e-header.e-box, .e-textbox {
+    .e-widget.e-box, .e-widget .e-box, .e-widget button.e-btn, button.e-btn.e-widget, input.e-btn.e-widget, input.e-input, input[type="text"].e-input, .e-input.e-placeholder, .e-widget input.e-input, .e-lv.e-js .e-header.e-box, .e-textbox, .e-textarea {
         -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
         -moz-box-sizing: border-box; /* Firefox, other Gecko */
         box-sizing: border-box; /* Opera/IE 8+ */
@@ -441,19 +446,19 @@
         opacity: 1 !important;
     }
 
-    .e-input::-webkit-input-placeholder {
+    .e-input::-webkit-input-placeholder ,.e-textbox::-webkit-input-placeholder, .e-textarea::-webkit-input-placeholder {
         .watermerk-style();
     }
 
-    .e-input::-moz-placeholder {
+    .e-input::-moz-placeholder,.e-textbox::-moz-placeholder, .e-textarea::-moz-placeholder {
         .watermerk-style();
     }
 
-    .e-input:-moz-placeholder {
+    .e-input:-moz-placeholder,.e-textbox:-moz-placeholder, .e-textarea:-moz-placeholder {
         .watermerk-style();
     }
 
-    .e-input:-ms-input-placeholder {
+    .e-input:-ms-input-placeholder,.e-textbox:-ms-input-placeholder, .e-textarea:-ms-input-placeholder {
         .watermerk-style();
     }
 
@@ -477,6 +482,9 @@
 
     .e-textbox {
         height: @input-height;
+    }
+
+    .e-textbox, .e-textarea {
         width: 100%;
         padding-left: 0.857em;
         line-height: 1.908em\9;
@@ -868,6 +876,10 @@
         box-shadow: @box-shadow;
     }
 
+    .e-split.e-menu.e-corner{
+        border-radius:4px;
+    }
+
     .e-split.e-context, .e-split.e-context li.e-list.e-haschild {
         overflow: visible;
     }
@@ -1181,6 +1193,9 @@
     .e-atc-popup div.e-atc-tableHeaderContent {
         overflow: hidden;
     }
+     .e-atc .e-boxes.e-disable {
+        pointer-events: none;
+    }
 }
 
 .mixin(@widget) when (@widget = dropdownlist), (@widget = none) {
@@ -1233,7 +1248,7 @@
         outline: 0 none;
     }
 
-    .e-ddl-popup div > ul li {
+    .e-ddl-popup div > ul li, .e-ddl-popup div > .e-listbox li {
         padding: 5px 5px 5px 0.857em;
         min-height: 1.3em;
         line-height: 1.4;
@@ -1729,9 +1744,239 @@
     .e-datepicker.e-popup.e-disable .e-header .e-text,
     .e-datepicker.e-popup.e-disable .e-header .e-next,
     .e-datepicker.e-popup.e-disable .e-header .e-prev,
+     .e-daterangewidget .e-select.e-disable,.e-daterangewidget .e-select.e-disable .e-icon,
     .e-datewidget .e-select.e-disable, .e-datewidget .e-select.e-disable .e-icon {
         cursor: default;
     }
+}
+.mixin(@widget) when (@widget = daterangepicker), (@widget = none) {
+		.e-daterangewidget.e-error .e-in-wrap {
+		border-color: red;
+		}
+		.e-daterangewidget {
+		display: block;
+		overflow: visible;
+		width: 143px;
+		height: 30px;
+		}
+		.e-daterangewidget .e-padding {
+		padding: 0 24px 0 0;
+		}
+		.e-daterangewidget .e-icon {
+		display: block;
+		position: absolute;
+		top: 50%;
+		font-size: 21px;
+		height: 21px;
+		margin-top: -11px;
+		}
+		.e-daterangewidget .e-select {
+		cursor: pointer;
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 23px;
+		height: 100%;
+		text-align: left;
+		border-left: 1px solid;
+		}
+		.e-daterangewidget.e-rtl .e-select {
+		border-right: 1px solid;
+		border-left: none;
+		}
+		.e-daterangewidget.e-rtl .e-in-wrap.e-padding{
+		padding: 0 0 0 24px;
+		}
+		.e-daterangepicker-popup {
+		display:inline-block;
+		width:auto;
+		box-sizing:content-box;
+		position:absolute;
+		}
+
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-state-hover,
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.today
+
+		{
+		border-radius:1px;
+
+		}
+
+		.e-daterangepicker-popup .e-custom-dateranges {
+		width:auto;
+		float:right;
+		font-size:13px;
+		-webkit-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+		}
+		.e-daterangepicker-popup  .e-datepickers-popup {
+		display:inline-block;
+		}
+		.e-daterangepicker-popup  .e-right-datepicker {
+		float:right;
+		padding-right:5px;
+		}
+		.e-daterangepicker-popup  .e-left-datepicker {
+		display:inline-block;
+		}
+		.e-daterangepicker-popup  .e-left-datepicker, .e-daterangepicker-popup  .e-right-datepicker {
+		padding-left:5px;
+		padding-top:5px;
+
+		}
+		.e-daterangepicker-popup  .e-left-datepicker .e-calendar, .e-daterangepicker-popup  .e-right-datepicker .e-calendar {
+		padding-top:5px;
+		-webkit-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+		}
+		.e-daterangepicker-popup  .e-left-datepicker .e-timewidget, .e-daterangepicker-popup  .e-right-datepicker .e-timewidget{
+		float:right;
+		padding-top:5px;
+		-webkit-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+		}
+		
+		.e-daterangepicker-popup .e-datepicker.e-popup.e-calendar {
+		border:none;
+		}
+		.e-daterangepicker-popup .e-datepicker .e-header {
+		border:none;
+		}
+		.e-daterangepicker-popup .e-datepicker .e-dp-viewdays 
+		{
+		border-collapse:separate;
+		border-spacing:0 2px;
+		}
+		.e-datepickers-popup {
+		display:inline-flex;
+		}
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default{
+		height:30px;
+
+		}
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.in-range:hover
+		{
+		border-radius:1px;
+		}
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-start-date,
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default.e-end-date
+
+		{
+		border-radius:24px !important;
+		}
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days .e-state-default:hover {
+		font-weight:600;
+
+		}
+		.e-dateranges {
+		height:104px;
+		width:100px;
+
+		}
+        .e-daterange-timepopup.e-time-popup {
+            font-size:13px;
+        }
+		.e-daterangepicker-popup .e-custom-dateranges ul {
+		padding:0;
+		margin-top:0;
+		}
+		.e-custom-dateranges li {
+		cursor: pointer;
+		list-style: none;
+		line-height: 30px;
+		padding: 0 10px 0 10px;
+		margin: 5px;
+		overflow: hidden;
+        white-space: nowrap;
+        max-width: 200px;
+		-ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+		}
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days  td.e-state-default.in-range:last-child , 
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days  td.e-state-default.in-range:last-child :hover{
+			border-bottom-right-radius: 12px;
+			border-top-right-radius: 12px;
+		}
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days  td.e-state-default.in-range:first-child , 
+		.e-daterangepicker-popup .e-datepicker .e-datepicker-days  td.e-state-default.in-range:last-child :hover{
+			border-bottom-left-radius: 12px;
+			border-top-left-radius: 12px;
+		}
+
+		/*apply buttons*/
+		.e-daterangepicker-popup .e-drp-button {
+		float: right;
+		display: inline-block;
+		text-align: center;
+		cursor: pointer;
+		border: 1px solid;
+		margin-left: 10px;
+		padding: 4px 16px;
+		margin: 5px 5px 5px 5px;
+		font-size:13px;
+		}
+		.e-daterangepicker-popup .e-drpbuttons div {
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 100px;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+			-webkit-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+            border-radius:@border-radius;
+        }
+
+		.e-daterangepicker-popup .e-drp-button.e-drp-reset {
+		float:left;
+		}
+		.e-daterangepicker-popup .e-drp-button.e-drp-apply, .e-daterangepicker-popup .e-drp-button.e-drp-cancel {
+		margin-left: 0;
+		}
+
+		/* responsive css*/
+		.e-daterange-responsive {
+			display: block;
+		}
+
+		.e-daterange-responsive .e-datepickers-popup {
+			width: 100%;
+			display:block;
+		}
+		.e-daterange-responsive .e-datepickers-popup > div {
+			width:100%;
+			display:block;
+			padding:0;
+		}
+		.e-daterange-responsive .e-datepickers-popup .e-datewidget{
+			padding:5px;
+			width:95%
+		}
+		.e-daterange-responsive .e-drpbuttons {
+		display:block;
+		width:100%;
+		float:none;
+        max-width:200px;
+		}
+		.e-daterange-responsive .e-custom-dateranges  {
+		width:100%;
+		border-top:1px solid;
+		}
+		.e-daterange-responsive .e-drpbuttons div {
+					max-width: 40px;
+				}
+
+	
 }
 
 .mixin(@widget) when (@widget = menu), (@widget = none) {
@@ -2430,6 +2675,7 @@
         margin: 0;
         text-align: left;
         padding: 0;
+        box-shadow: @box-shadow;
     }
 
     .e-tab.e-vertical .e-right .e-icon {
@@ -3282,6 +3528,14 @@
         outline: 0 none;
     }
 
+    .e-fullrow-wrap.e-treeview-wrap {
+        position: relative;
+    }
+
+    .e-fullrow-wrap .e-treeview-ul {
+        position: inherit;
+    }
+
     .e-treeview .e-item {
         margin: 0;
         padding: 0px 0px 2px 16px;
@@ -3300,6 +3554,26 @@
         margin-left: 2px;
     }
 
+    .e-fullrow-wrap .e-text {
+        vertical-align: top;
+    }
+
+    .e-fullrow-wrap .e-fullrow {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        -webkit-user-select: none;
+        margin-top: -@treeview-fullrow-height;
+        height: @treeview-fullrow-height;
+        box-sizing: border-box;
+    }
+
+    .e-fullrow-wrap .e-text-wrap {
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+
     .e-treeview .e-text.e-editable {
         background: none;
         border: none;
@@ -3309,6 +3583,11 @@
     .e-treeview .e-text.e-editable .e-tree-input {
         box-sizing: border-box;
         padding: @treeview-edit-text-padding;
+        margin: 0;
+    }
+
+    .e-treeview-wrap.e-rtl .e-text.e-editable .e-tree-input {
+        padding: @treeview-rtl-edit-text-padding;
     }
 
     .e-dragedNode {
@@ -3347,11 +3626,16 @@
         float: right;
     }
 
+    .e-dragedNode .e-text {
+        text-decoration: none;
+    }
+
     .e-treeview .e-sibling {
         width: 80px;
         height: 5px;
         position: absolute;
         margin-top: -2px;
+        z-index: 2;
     }
 
     .e-treeview.e-rtl .e-sibling {
@@ -3401,7 +3685,6 @@
         background-repeat: no-repeat;
         border: 0 none transparent;
         float: left;
-        height: @treeview-icon-height;
         width: 16px;
         padding-top: @treeview-icon-margin;
         margin-left: -16px;
@@ -3545,6 +3828,15 @@
 
     .e-treeview .e-fe-popup .e-downtail:after {
         top: 34px;
+    }
+
+    .e-fullrow-wrap .e-treeview-ul {
+        margin-bottom: -2px;
+    }
+
+    .e-fullrow-wrap .e-li-active .e-active, .e-fullrow-wrap .e-li-hover .e-node-hover, .e-fullrow-wrap .e-li-hover .e-node-focus, .e-fullrow-wrap .e-li-focus .e-node-focus {
+        border: 0px;
+        margin: 1px 1px 1px 3px;
     }
 }
 
@@ -4170,6 +4462,12 @@ background-image: url('../@{font-path}/icons-white.png');
     .e-mediaforward:before {
         content: "\e65e";
     }
+    .e-arrowheadright-2x:before{
+          content: "\e664";
+    }
+     .e-arrowheadleft-2x:before{
+         content: "\e665";
+     }
 
     .e-medianext:before {
         content: "\e65d";
@@ -5885,7 +6183,7 @@ background-image: url('../@{font-path}/icons-white.png');
 
     .e-datetime-popup .e-popup-container {
         display: inline-flex;
-        padding: 5px;
+        padding:5px;
     }
 
     .e-datetime-popup .e-button-container {
@@ -6287,7 +6585,7 @@ background-image: url('../@{font-path}/icons-white.png');
 
     .e-grid .e-dialog.e-widget .e-dialog-icon, .e-grid .e-widget .e-pagercontainer > .e-icon, .e-grid .e-widget .e-pagercontainer .e-numericitem,
     .e-grid .e-widget .e-filtericon, .e-grid .e-widget .e-filtertext, .e-grid .e-widget .e-predicate span, .e-grid .e-widget .e-value .e-chk-act, .e-grid .e-detailcell .e-groupheadercell,
-    .e-grid .e-detailcell .e-ungroupbutton {
+    .e-grid .e-detailcell .e-ungroupbutton, .e-grid .e-excelfilter .e-chk-act {
         box-sizing: content-box;
     }
 
@@ -6710,6 +7008,10 @@ background-image: url('../@{font-path}/icons-white.png');
         line-height: 18px;
     }
 
+    .e-grid .e-rowcell.e-nowrap, 
+    .e-grid .e-wrap .e-rowcell.e-nowrap {
+        white-space: nowrap;
+    }
     .e-grid.e-wrap .e-columnheader .e-headercelldiv {
         margin-bottom: 2px;
         margin-top: 0px;
@@ -7551,19 +7853,8 @@ background-image: url('../@{font-path}/icons-white.png');
         overflow: hidden;
         text-align: center;
         text-decoration: none;
-        border: medium none;
         margin: 0;
     }
-
-    .e-grid .e-dlgBtns .e-button {
-        cursor: pointer;
-        overflow: hidden;
-        text-align: center;
-        text-decoration: none;
-        border: medium none;
-        margin: 0;
-    }
-
     .e-grid.e-columnChooser .e-columnChooserListDiv * {
         box-sizing: content-box;
     }
@@ -7679,7 +7970,10 @@ background-image: url('../@{font-path}/icons-white.png');
     .e-grid.e-rtl .e-headercelldiv {
         text-align: right;
         padding: 0 0.7em;
-		direction:ltr;
+		white-space: nowrap;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis; 
     }
 
     .e-grid.e-rtl .e-headercelldiv:not(:only-child) {
@@ -7823,7 +8117,7 @@ background-image: url('../@{font-path}/icons-white.png');
         padding-bottom: 9px;
     }
 
-    .e-spreadsheet .e-pager .e-icon {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-icon {
         display: inline-block;
         box-sizing: content-box;
     }
@@ -10061,6 +10355,13 @@ background-image: url('../@{font-path}/icons-white.png');
         padding-top: 4px;
     }
 
+    .e-gantt .e-excelIcon:before {
+        font-size: 14px;
+        margin-left: 3px;
+        padding-top: 4px;
+        content: "\e718";
+    }
+
     .e-gantt .e-searchitem {
     }
 
@@ -10537,6 +10838,7 @@ background-image: url('../@{font-path}/icons-white.png');
         cursor: default;
         padding: 0;
         vertical-align: middle;
+        font-weight: normal;
     }
 
     .e-treegrid .e-filterbarcell .e-filtertext {
@@ -10783,12 +11085,6 @@ background-image: url('../@{font-path}/icons-white.png');
         border-collapse: collapse;
     }
 
-    .e-treegrid .e-headercontent {
-        border-right-width: 1px;
-        border-right-style: solid;
-        overflow: hidden;
-    }
-
     .e-treegrid .e-ejinputtext {
         border-width: 1px;
         border-style: solid;
@@ -10838,6 +11134,21 @@ background-image: url('../@{font-path}/icons-white.png');
     }
 
     .e-treegrid .e-headercell .e-columnicon:before {
+        font-size: 14px !important;
+    }
+
+    .e-treegrid .e-headercell .e-filtericon {
+        height: 16px;
+        width: 10px;
+        float: right;
+        margin-top: -17px;
+        margin-right: -30px;
+        padding: 3px;
+        box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+    }
+
+    .e-treegrid .e-headercell .e-filtericon:before {
         font-size: 14px !important;
     }
 
@@ -10895,6 +11206,14 @@ background-image: url('../@{font-path}/icons-white.png');
 
     .e-column-rename-icon:before {
         content: "\e7f5";
+    }
+
+    .e-column-filter-icon:before {
+        content: "\e669";
+    }
+
+    .e-column-filtered-icon:before {
+        content: "\e668";
     }
 
     .e-column-delete-icon:before {
@@ -11016,6 +11335,10 @@ background-image: url('../@{font-path}/icons-white.png');
 
     .e-treegrid .e-table {
         margin-top: 0px;
+    }
+    .e-treegrid .e-tableLastCell {
+        border-right-width: 1px;
+        border-style: solid;
     }
 }
 
@@ -12109,7 +12432,7 @@ background-image: url('../@{font-path}/icons-white.png');
     .e-schedule .e-leftindent {
         vertical-align: middle !important;
     }
-
+    .e-schedule .e-fixedlayout,
     .e-schedule .e-leftindenttable {
         table-layout: fixed;
     }
@@ -14572,13 +14895,11 @@ background-image: url('../@{font-path}/icons-white.png');
     .e-excelfilter .e-menu .e-list .e-bghdrcolor {
         padding: 0px;
         height: 26px;
-        width: 134px;
     }
 
     .e-excelfilter .e-menu .e-list .e-fghdrcolor {
         padding-bottom: 4px;
         height: 26px;
-        width: 134px;
     }
 
     .e-excelfilter .e-menu.e-vertical .e-list ul li.e-bghdrcolor > a, .e-excelfilter .e-menu.e-vertical .e-list ul li.e-fghdrcolor > a {
@@ -14590,7 +14911,7 @@ background-image: url('../@{font-path}/icons-white.png');
 	}
 	
     .e-excelfilter .e-menu .e-list .e-valcolor {
-        margin-left: 30px;
+        margin: 0 auto;
         height: 16px;
         width: 70px;
         border-style: solid;
@@ -14608,6 +14929,10 @@ background-image: url('../@{font-path}/icons-white.png');
     .e-nb.e-nb-home {
         width: 100%;
     }
+    
+    .e-nb.e-nb-container {
+        direction: ltr;
+     }
 
     .e-nb.e-nb-layout {
         margin-right: 6px;
@@ -14615,6 +14940,18 @@ background-image: url('../@{font-path}/icons-white.png');
         position: absolute;
         top: 0px;
         z-index: 1000;
+    }
+   .e-nb-fixed,.e-nb-normal {
+        overflow: visible !important;
+    }
+
+   .e-nb-fixed:not(.e-nb-type-overlay) {
+        width: 100%;
+    }
+    .e-nb-fixed-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
     }
 
     .e-nb.e-nb-animate {
@@ -16469,6 +16806,7 @@ slideRight Animate
     .e-kanban .e-cardcontent .e-cardtable {
         width: 100%;
         table-layout: fixed;
+        border-spacing: 0px;
     }
 
     .e-kanban .e-kanbancard .e-card_image {
@@ -17018,6 +17356,7 @@ slideRight Animate
 }
 .e-kanban .e-kanbancard .e-trainglecell{
    vertical-align:bottom;
+   padding: 0px;
 }
 .e-kanban .e-headercell.e-toggle-withoutcount .e-headercelldiv{
  height: 100%; 
@@ -17072,7 +17411,9 @@ slideRight Animate
     .e-ribbon.e-js.e-widget {
         position: relative;
     }
-
+     .e-ribbon .e-rbnondemand{
+	    box-sizing:border-box !important;
+	   }
     .e-ribbon.e-js > .e-header {
         position: relative;
         border: 1px solid;
@@ -17101,15 +17442,15 @@ slideRight Animate
     .e-ribbon .e-empty-content {
         padding: 0;
         margin: 0;
-        height: 30px;
+        height: 30px !important;
     }
 
     .e-ribbon .e-content-show {
         display: block;
     }
 
-    .e-ribbon .e-groupdiv .e-gallerybtn, .e-ribbon .e-groupdiv .e-gallerybtn:hover, .e-ribbon .e-groupdiv .e-galleryselect,
-    .e-ribbon .e-resizediv .e-gallerybtn, .e-ribbon .e-resizediv .e-gallerybtn:hover, .e-ribbon .e-resizediv .e-galleryselect {
+    .e-ribbon .e-groupdiv .e-rbn-button.e-gallerybtn, .e-ribbon .e-groupdiv .e-rbn-button.e-gallerybtn:hover, .e-ribbon .e-groupdiv .e-rbn-button.e-galleryselect,
+    .e-ribbon .e-resizediv .e-rbn-button.e-gallerybtn, .e-ribbon .e-resizediv .e-rbn-button.e-gallerybtn:hover, .e-ribbon .e-resizediv .e-rbn-button.e-galleryselect {
         border: 3px solid;
         overflow: hidden;
     }
@@ -17158,8 +17499,8 @@ slideRight Animate
         border-top: 1px solid;
     }
 
-    .e-ribbon .e-groupdiv .e-galleryextrabtn,
-    .e-ribbon .e-resizediv .e-galleryextrabtn {
+    .e-ribbon .e-groupdiv .e-rbn-button.e-galleryextrabtn,
+    .e-ribbon .e-resizediv .e-rbn-button.e-galleryextrabtn {
         overflow: hidden;
         display: table;
         width: 100%;
@@ -17248,7 +17589,7 @@ slideRight Animate
         left: -2px;
     }
 
-    .e-ribbon.e-rtl .e-button .e-icon {
+    .e-ribbon.e-rtl .e-rbn-button.e-button .e-icon {
         float: none;
     }
 
@@ -17303,7 +17644,7 @@ slideRight Animate
         padding: 6px 8px 0 3px;
     }
 
-    .e-ribbon .e-btn {
+    .e-ribbon .e-rbn-button.e-btn {
         border: none;
     }
 
@@ -17326,7 +17667,7 @@ slideRight Animate
         border: none;
     }
 
-    .e-ribbon .e-ddl .e-select {
+    .e-ribbon .e-rbn-ddl.e-ddl .e-select {
         background: none repeat scroll 0 0;
         border: medium none;
     }
@@ -17712,12 +18053,12 @@ slideRight Animate
         border-style: solid;
     }
 
-    .e-ribbon .e-js.e-colorSplit.e-splitbutton.e-split-btn {
+    .e-ribbon .e-js.e-colorSplit.e-splitbutton.e-split-btn.e-rbn-button{
         border: 1px solid;
         border-right: none;
     }
 
-    .e-ribbon .e-split-btn.e-drp-btn.e-rht-btn {
+    .e-ribbon .e-split-btn.e-drp-btn.e-rht-btn.e-rbn-button {
         border: 1px solid;
     }
 
@@ -17772,11 +18113,11 @@ slideRight Animate
         padding-top: 3px;
     }
 
-    .e-ribbon .e-content .e-split-btn, .e-ribbon .e-header .e-apptab .e-menu {
+    .e-ribbon .e-content .e-rbn-button.e-split-btn, .e-ribbon .e-header .e-apptab .e-menu {
         white-space: normal;
     }
 
-    .e-ribbon .e-content .e-split-btn,
+    .e-ribbon .e-content .e-rbn-button.e-split-btn,
     .e-ribbon .e-header .e-apptab .e-menu {
         white-space: normal;
     }
@@ -18027,7 +18368,7 @@ slideRight Animate
         border: 1px solid;
     }
 
-    .e-fileexplorer .e-toolbar, .e-fe-dialog.e-dialog > .e-header + .e-dialog-scroller {
+    .e-fileexplorer .e-toolbar {
         border: 0 none;
     }
 
@@ -19442,7 +19783,7 @@ slideRight Animate
     }
 
     .e-fileexplorer.e-corner-all .e-item .e-text, .e-fileexplorer.e-corner-all .e-tilenode, .e-fileexplorer.e-corner-all input,
-    .e-fe-dialog.e-corner input, .e-fe-dialog.e-corner button,
+    .e-fe-dialog.e-corner input, .e-fe-dialog.e-corner button, .fe-context-menu.e-corner ul,
     .e-fileexplorer.e-corner-all .e-scrollbar .e-vhandle, .e-fileexplorer.e-corner-all .e-scrollbar .e-hhandle {
         border-radius: 4px 4px 4px 4px;
     }
@@ -19610,9 +19951,9 @@ slideRight Animate
     .e-fileexplorer .e-chkbox-wrap .e-checkmark {
         line-height: 14px;
     }
-    .e-fileexplorer .e-toolbar .e-tool-input,
+    .e-fileexplorer input,
     .e-fe-toolbar.e-responsive-toolbar .e-tool-input,
-    .e-fe-dialog input.e-fe-dialog-text {
+    .e-fe-dialog input {
         border-radius: @border-radius;
     }
     .e-fileexplorer.e-fe-small .e-fe-dialog-text{
@@ -19644,15 +19985,11 @@ slideRight Animate
         -moz-user-select: none; /* Firefox all */
         -ms-user-select: none; /* IE 10+ */
         -o-user-select: none;
+         border: 1px solid;
     }
 
     .e-spreadsheet-list {
         position: relative;
-    }
-
-    .e-spreadsheet {
-        border: 1px solid;
-        display: inline-block;
     }
 
     .e-spreadsheet h6 {
@@ -19671,11 +20008,11 @@ slideRight Animate
         font-weight: normal;
     }
 
-    .e-spreadsheet .e-spreadsheetcolumnheader {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-spreadsheetcolumnheader {
         border-bottom: 1px solid;
     }
 
-    .e-spreadsheet .e-headercell {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-headercell {
         height: 20px;
         background: none repeat scroll 0 0;
         border-width: 0 1px 1px 0;
@@ -19687,12 +20024,12 @@ slideRight Animate
         text-overflow: ellipsis;
     }
 
-    .e-spreadsheet .e-headercontent {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-headercontent {
         border-right: 1px solid;
         border-left: 1px solid;
     }
 
-	.e-spreadsheet .e-headercontent.e-rmvrghtbdr,
+	.e-spreadsheet .e-spreadsheetmainpanel .e-headercontent.e-rmvrghtbdr,
 	.e-spreadsheet .e-spreadsheetcontentcontainer .e-content.e-rmvrghtbdr td:last-child {
 	  border-right-color: transparent;
 	}
@@ -19727,7 +20064,7 @@ slideRight Animate
         border-spacing: 0;
     }
 
-    .e-spreadsheet .e-rowcell {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-rowcell {
         border-width: 0 1px 1px 0;
         border-style: solid;
         line-height: normal;
@@ -19764,7 +20101,7 @@ slideRight Animate
         margin: 0 2px 0 2px;
     }
 
-    .e-spreadsheet .e-rowcell > button {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-rowcell > button {
         font-size: 9px;
     }
 
@@ -19807,10 +20144,10 @@ slideRight Animate
         box-sizing: content-box;
     }
 
-    .e-spreadsheet .e-headercontent,
-    .e-spreadsheet .e-rowheadercontent,
-    .e-spreadsheet .e-headercell,
-    .e-spreadsheet .e-spreadsheetcontentcontainer {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-headercontent,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-rowheadercontent,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-headercell,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-spreadsheetcontentcontainer {
         overflow: hidden;
         position: relative;
     }
@@ -19867,53 +20204,53 @@ slideRight Animate
     }
     /*---------------------------- Spreadhsheet Scroller End----------------------------------------*/
     /*-------------------- Borders ------------------------ */
-    .e-spreadsheet td.e-bborderright,
-    .e-spreadsheet td.e-rborderright,
-    .e-spreadsheet td.e-vborderright,
-    .e-spreadsheet td.e-gborderright,
-    .e-spreadsheet td.e-pborderright,
-    .e-spreadsheet td.e-oborderright,
-    .e-spreadsheet td.e-bctrlborderright,
-    .e-spreadsheet td.e-rctrlborderright,
-    .e-spreadsheet td.e-vctrlborderright,
-    .e-spreadsheet td.e-gctrlborderright,
-    .e-spreadsheet td.e-pctrlborderright,
-    .e-spreadsheet td.e-octrlborderright {
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-bborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-rborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-vborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-gborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-pborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-oborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-bctrlborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-rctrlborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-vctrlborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-gctrlborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-pctrlborderright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-octrlborderright {
         border-right: 1px dashed;
     }
 
-    .e-spreadsheet td.e-bborderbottom,
-    .e-spreadsheet td.e-rborderbottom,
-    .e-spreadsheet td.e-vborderbottom,
-    .e-spreadsheet td.e-gborderbottom,
-    .e-spreadsheet td.e-pborderbottom,
-    .e-spreadsheet td.e-oborderbottom,
-    .e-spreadsheet td.e-bctrlborderbottom,
-    .e-spreadsheet td.e-rctrlborderbottom,
-    .e-spreadsheet td.e-vctrlborderbottom,
-    .e-spreadsheet td.e-gctrlborderbottom,
-    .e-spreadsheet td.e-pctrlborderbottom,
-    .e-spreadsheet td.e-octrlborderbottom {
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-bborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-rborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-vborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-gborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-pborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-oborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-bctrlborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-rctrlborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-vctrlborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-gctrlborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-pctrlborderbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-octrlborderbottom {
         border-bottom: 1px dashed;
     }
     /*--------------------- Chart Borders -----------------------*/
-    .e-spreadsheet td.e-bcbright,
-    .e-spreadsheet td.e-vcbright,
-    .e-spreadsheet td.e-rcbright {
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-bcbright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-vcbright,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-rcbright {
         border-right: 1px solid;
     }
 
-    .e-spreadsheet td.e-bcbbottom,
-    .e-spreadsheet td.e-vcbbottom,
-    .e-spreadsheet td.e-rcbbottom {
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-bcbbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-vcbbottom,
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-rcbbottom {
         border-bottom: 1px solid;
     }
     /*--------------------- Border -------------------------- */
-    .e-spreadsheet .e-thinright {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-thinright {
         border-right: 1px solid;
     }
 
-    .e-spreadsheet .e-thinbottom {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-thinbottom {
         border-bottom: 1px solid;
     }
     /*--------------------- Selection -------------------------- */
@@ -19962,15 +20299,15 @@ slideRight Animate
         cursor: crosshair;
     }
     /*--------------------- Cut and Copy ------------------------ */
-    .e-spreadsheet td.e-cutright {
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-cutright {
         border-right: 1px dashed;
     }
 
-    .e-spreadsheet td.e-cutbottom {
+    .e-spreadsheet .e-spreadsheetmainpanel td.e-cutbottom {
         border-bottom: 1px dashed;
     }
     /*------------------------- Pager------------------------- */
-    .e-spreadsheet .e-pager .e-mediaforward {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-mediaforward {
         border-right: solid 1px;
         border-radius: 0;
     }
@@ -19979,46 +20316,46 @@ slideRight Animate
         position: absolute;
     }
 
-    .e-spreadsheet .e-pager .e-new {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-new {
         height: 100%;
         padding: 0 4px 2px 8px;
         vertical-align: middle;
     }
 
-    .e-spreadsheet .e-pager {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager {
         padding-bottom: 0px;
         padding-top: 0px;
         outline: 0px;
     }
 
-    .e-spreadsheet .e-pager,
-    .e-spreadsheet .e-pager .e-pagercontainer {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-pagercontainer {
         border-style: none;
     }
 
-    .e-spreadsheet .e-pager .e-currentitem {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-currentitem {
         border-bottom: solid;
     }
 
-    .e-spreadsheet .e-pager .e-numericitem {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-numericitem {
         padding-right: 9px;
         padding-left: 9px;
         padding-bottom: 4px;
         padding-top: 3px;
     }
 
-    .e-spreadsheet .e-pager .e-firstpage,
-    .e-spreadsheet .e-pager .e-prevpage,
-    .e-spreadsheet .e-pager .e-firstpagedisabled,
-    .e-spreadsheet .e-pager .e-prevpagedisabled,
-    .e-spreadsheet .e-pager .e-nextpage,
-    .e-spreadsheet .e-pager .e-lastpage,
-    .e-spreadsheet .e-pager .e-nextpagedisabled,
-    .e-spreadsheet .e-pager .e-lastpagedisabled {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-firstpage,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-prevpage,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-firstpagedisabled,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-prevpagedisabled,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-nextpage,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-lastpage,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-nextpagedisabled,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-lastpagedisabled {
         padding: 7px 3px 0px 7px;
     }
 
-    .e-spreadsheet .e-pager .e-pagercontainer {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-pager .e-pagercontainer {
         overflow: visible;
         height: 24px;
     }
@@ -20182,11 +20519,11 @@ slideRight Animate
         padding: 0px 0px 0px 2px;
     }
 
-    .e-spreadsheet .e-editedcell {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-editedcell {
         padding: 0px 1px 0px 0px;
     }
 
-    .e-spreadsheet .e-editedcell.e-msie-edit {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-editedcell.e-msie-edit {
         padding: 0px;
     }
     /*------------------------- Validation---------------------- */
@@ -22308,11 +22645,11 @@ slideRight Animate
         box-sizing: content-box;
     }
 
-    .e-spreadsheet .e-headercell.e-ss-colresize {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-headercell.e-ss-colresize {
         cursor: col-resize;
     }
 
-    .e-spreadsheet .e-rowheader.e-ss-rowresize {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-rowheader.e-ss-rowresize {
         cursor: row-resize;
     }
 
@@ -23082,13 +23419,13 @@ slideRight Animate
         border: medium none;
     }
 
-    .e-spreadsheet .e-colselected,
-    .e-spreadsheet .e-colhighlight {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-colselected,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-colhighlight {
         font-weight: bold;
     }
 
-    .e-spreadsheet .e-rowselected,
-    .e-spreadsheet .e-rowhighlight {
+    .e-spreadsheet .e-spreadsheetmainpanel .e-rowselected,
+    .e-spreadsheet .e-spreadsheetmainpanel .e-rowhighlight {
         font-weight: bold;
     }
 
@@ -23626,7 +23963,7 @@ slideRight Animate
         border-width: 1px;
     }
     /*------VS2010-MVC3-site.css dialog-table-css-override------*/
-    .e-spreadsheet .e-ribbon table td, .e-ss-dialog table td {
+    .e-spreadsheet .e-ribbon .e-content-item table td, .e-ss-dialog table td {
         border: none;
         padding: 0px;
     }
@@ -23786,6 +24123,16 @@ slideRight Animate
      .e-spreadsheet .e-groupexpander.e-disable:hover {
          background:none;
 	 }
+
+     /* PivotTable Customization*/
+
+   .e-spreadsheet .e-spreadsheetcontentcontainer .e-pivotgrid th, 
+   .e-spreadsheet .e-spreadsheetcontentcontainer .e-pivotgrid td {
+            padding-top:0px;
+            padding-bottom:0px;
+            height:19px;
+            box-sizing:content-box;
+	    }
     /*-------------------------------------SpreadSheet End -----------------------*/
 }
 

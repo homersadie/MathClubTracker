@@ -8,9 +8,12 @@
 <table>
     <tr>
         <td><label>Name</label></td>
-        <td>@Model.LastName</td>
+        <td>@Model.FirstName @Model.LastName</td>
     </tr>
+    <tr><td><label>Graduation Year</label></td><td>@Model.GraduationYear</td></tr>
+    <tr><td><label>Current Courses</label></td><td>XXX</td></tr>
 </table>
 
-<a href="@Url.Action("Index")" ">Back to Student Maintenance</a>
+<a href="@Url.Action("Index")">Back to Student Maintenance</a>
+<a href="@Url.Action("Index", "Home")">Back to Main</a>
 

@@ -5,13 +5,13 @@
 
 
 <div class="content-container-fluid">
+<div class="row">
+    <a href="@Url.Action("Index","Student")">Student Maintenance</a>
+
+</div>
     <div class="row">
-        <div class="cols-sample-area" style="width:600px">
-
-            <div id="Grid" class="waiting"></div>
-        </div>
+        <label>Jump to Student</label><input type="text" id="autoStudent" />
     </div>
-
     <div class="row">
         1. Add Student<br/>
         2. Remove Student<br/>
@@ -79,31 +79,12 @@
 </style>
 
 
-
-<script type="text/x-jsrender" id="mgTemplate">
-    <a href="@Url.Action("Detail","Student")?id={{:MathGeniusId}}">View {{:MathGeniusId}}</a>
-</script>
-
     <script type="text/javascript">
 
 
 
         $(function () {
             //debugger;
-            $("#Grid").ejGrid({
-                dataSource: ej.DataManager({url: "@Url.Action("PagingGetStudents","Student")"   }),
-                allowPaging: true,
-                pageSettings: { pageSize: 10 , enableQueryString: true },
-                allowSorting: true,
-                allowMultiSorting: true,
-                columns: [
-                    { field: "MathGeniusId", headerText: "MG ID", template: true, templateID: "#mgTemplate", width: 75, textAlign: ej.TextAlign.Left, },
-                        { field: "LastName", headerText: "Last Name", width: 75, textAlign: ej.TextAlign.Left },
-                        { field: "FirstName", headerText: "First Name", width: 75, textAlign: ej.TextAlign.Left },
-                        { field: "Gender", headerText: "Sex", width: 75, textAlign: ej.TextAlign.Center },
-                        { field: "GraduationYear", headerText: "Class Of", width: 125, textAlign: ej.TextAlign.Center }
-                ]
-            });
 
             $("#txtMathGeniusId").ejNumericTextbox(
                          {
@@ -135,6 +116,34 @@
                 }
             });
 
+            var carList = [
+                "Audi S6", "Austin-Healey", "Alfa Romeo", "Aston Martin",
+                "BMW 7", "Bentley Mulsanne", "Bugatti Veyron",
+                "Chevrolet Camaro", "Cadillac",
+                "Duesenberg J", "Dodge Sprinter",
+                "Elantra", "Excavator",
+                "Ford Boss 302", "Ferrari 360", "Ford Thunderbird",
+                "GAZ Siber",
+                "Honda S2000", "Hyundai Santro",
+                "Isuzu Swift", "Infiniti Skyline",
+                "Jaguar XJS",
+                "Kia Sedona EX", "Koenigsegg Agera",
+                "Lotus Esprit", "Lamborghini Diablo",
+                "Mercedes-Benz", "Mercury Coupe", "Maruti Alto 800",
+                "Nissan Qashqai",
+                "Oldsmobile S98", "Opel Superboss",
+                "Porsche 356", "Pontiac Sunbird",
+                "Scion SRS/SC/SD", "Saab Sportcombi", "Subaru Sambar", "Suzuki Swift",
+                "Triumph Spitfire", "Toyota 2000GT",
+                "Volvo P1800", "Volkswagen Shirako"
+            ];
+
+            $('#autoStudent').ejAutocomplete({
+                width: 200,
+                watermarkText: "Select a car",
+                dataSource: carList
+            });
+
         });
 
         function AddStudent() {
@@ -163,13 +172,7 @@
             });
         }
 
-        function AddStudents() {
 
-        }
-
-        function resetGrid() {
-            $("#Grid").ejGrid("refreshContent");
-        }
 </script>
 
 
