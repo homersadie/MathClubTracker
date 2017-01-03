@@ -51,9 +51,11 @@
   <ItemGroup>
     <Compile Include="DomainObjects\BaseDomainObject.cs" />
     <Compile Include="DomainObjects\Class.cs" />
-    <Compile Include="DomainObjects\ClassSession.cs" />
-    <Compile Include="DomainObjects\ClassSessionStudent.cs" />
+    <Compile Include="DomainObjects\ClassStudent.cs" />
     <Compile Include="DomainObjects\CourseCategory.cs" />
+    <Compile Include="DomainObjects\ScannedTest.cs" />
+    <Compile Include="DomainTransferObjects\ClassDTO.cs" />
+    <Compile Include="DomainTransferObjects\ClassStudentDTO.cs" />
     <Compile Include="DomainTransferObjects\StudentDTO.cs" />
     <Compile Include="Search\SearchCriteria.cs" />
     <Compile Include="Search\StudentSearchCriteria.cs" />

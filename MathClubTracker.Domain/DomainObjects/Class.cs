@@ -12,12 +12,14 @@ namespace MathClubTracker.Domain.DomainObjects {
     
         public Class() {
         
-             MyClassSessionBag = new List<ClassSession>();
+             MyClassStudentBag = new List<ClassStudent>();
         }
         
         [Required]
         public virtual int Id { get; protected internal set;}
-            
+
+        [Required]
+        public virtual int Year { get; protected internal set; }
 
         [Required]
         public virtual int SemesterId { get; protected internal set;}
@@ -28,13 +30,18 @@ namespace MathClubTracker.Domain.DomainObjects {
 
         public virtual int? CategoryId { get; protected internal set;}
 
-      
-        
-        
-        protected internal virtual IList<ClassSession> MyClassSessionBag { get; set;}
+        public virtual DateTime? BeginDate { get; protected internal set; }
+
+        public virtual DateTime? EndDate { get; protected internal set; }
+
+        public virtual int? LocationId { get; protected internal set; }
+
+        public virtual string MeetingTime { get; protected internal set; }
+
+        protected internal virtual IList<ClassStudent> MyClassStudentBag { get; set;}
              
-        public virtual ReadOnlyCollection<ClassSession> MyClassSessions {
-           get { return new ReadOnlyCollection<ClassSession>(MyClassSessionBag); }
+        public virtual ReadOnlyCollection<ClassStudent> MyClassStudents {
+           get { return new ReadOnlyCollection<ClassStudent>(MyClassStudentBag); }
         }
         
         

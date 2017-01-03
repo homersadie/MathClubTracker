@@ -10,7 +10,7 @@
 
 </div>
     <div class="row">
-        <label>Jump to Student</label><input type="text" id="autoStudent" />
+        <a href="@Url.Action("Index","Assessment")">Test Maintenance</a>
     </div>
     <div class="row">
         1. Add Student<br/>
@@ -28,30 +28,13 @@
         11. Remove Course Category<br/>
         12. Edit Course Category<br/>
         13. Browse Course Categories<br/>
-
+        14. Load Scanned Test<br/>
+        15. Edit Scanned Test<br/>
+        16. Delete Scanned Test<br/>
+        17. Display Test Results<br/>
     </div>
 
-    <table>
-        <tr>
-            <td>Math Genius Id</td><td>Last Name</td><td>First Name</td><td>Sex</td><td>Graduation Year</td><td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td><input type="text" id="txtMathGeniusId"/></td>
-            <td><input type="text" id="txtLastName" /></td>
-            <td><input type="text" id="txtFirstName" /></td>
-            <td><input type="text" id="sex"/>
-                    <div id="sexList">
-                        <ul>
-                            <li>Male</li>
-                            <li>Female</li>
-                        </ul>
 
-                    </div></td>
-            <td><input type="text" id="gradyear" /></td>
-            <td><input type="button" id="btnAddStudent" value="Add"; onclick="AddStudent()" /></td>
-        </tr>
-        <tr><td colspan="6"><div id="updateMessage"></div></td></tr>
-    </table>
 </div>
 
 <div class="content-container-fluid">
@@ -86,24 +69,7 @@
         $(function () {
             //debugger;
 
-            $("#txtMathGeniusId").ejNumericTextbox(
-                         {
-                             name: "numeric",
-                             value: 100,
-                             minValue: 1,
-                             width: "100%"
-                         });
-            $('#sex').ejDropDownList({
-                targetID: "sexList",
-                watermarkText: "Sex",
-                width: "100%"
-            });
 
-            $('#gradyear').ejDropDownList({
-                dataSource: ej.DataManager({url: "@Url.Action("GraduationYear","Code")"   }),
-                watermarkText: "Select a Graduation Year",
-                width: "100%"
-            });
 
             saveUrl = "@Url.Action("UploadStudents","Student")";
             removeUrl = "@Url.Action("RemoveFile","Student")";
@@ -116,61 +82,12 @@
                 }
             });
 
-            var carList = [
-                "Audi S6", "Austin-Healey", "Alfa Romeo", "Aston Martin",
-                "BMW 7", "Bentley Mulsanne", "Bugatti Veyron",
-                "Chevrolet Camaro", "Cadillac",
-                "Duesenberg J", "Dodge Sprinter",
-                "Elantra", "Excavator",
-                "Ford Boss 302", "Ferrari 360", "Ford Thunderbird",
-                "GAZ Siber",
-                "Honda S2000", "Hyundai Santro",
-                "Isuzu Swift", "Infiniti Skyline",
-                "Jaguar XJS",
-                "Kia Sedona EX", "Koenigsegg Agera",
-                "Lotus Esprit", "Lamborghini Diablo",
-                "Mercedes-Benz", "Mercury Coupe", "Maruti Alto 800",
-                "Nissan Qashqai",
-                "Oldsmobile S98", "Opel Superboss",
-                "Porsche 356", "Pontiac Sunbird",
-                "Scion SRS/SC/SD", "Saab Sportcombi", "Subaru Sambar", "Suzuki Swift",
-                "Triumph Spitfire", "Toyota 2000GT",
-                "Volvo P1800", "Volkswagen Shirako"
-            ];
 
-            $('#autoStudent').ejAutocomplete({
-                width: 200,
-                watermarkText: "Select a car",
-                dataSource: carList
-            });
+
 
         });
 
-        function AddStudent() {
-            $("#btnAddStudent").prop("disabled", "disabled");
-            $("#updateMessage").hide();
-            $.ajax({
-                url: '@Url.Action("AddStudent","Student")',
-                data: {
-                    MathGeniusId : $("#txtMathGeniusId").val(),
-                    LastName: $("#txtLastName").val(),
-                    FirstName: $("#txtFirstName").val(),
-                    Sex: $("#sex").val(),
-                    GraduationYear: $("#gradyear").val()
-                },
-                error: function (e) {
-                    $("#updateMessage").show();
-                    $('#updateMessage').html('<p>' + e + '</p>');
-                },
-                complete: function () {
-                    $("#btnAddStudent").prop("disabled","");
-                },
-                success: function (data) {
-                    ProcessServiceResult(data, "#updateMessage", resetGrid(), null);
-                },
-                type: 'GET'
-            });
-        }
+
 
 
 </script>

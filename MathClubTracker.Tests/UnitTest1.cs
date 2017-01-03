@@ -45,7 +45,7 @@ namespace MathClubTracker.Tests
         [TestMethod]
         public void InsertStudent()
         {
-            svc.InitializeData();
+            //svc.InitializeData();
             ICollection<Student> students = svc.GetStudents();
             int beforeCount = students.Count;
             Student oldStudent = students.FirstOrDefault(x => x.LastName == "O'Donnell" && x.FirstName == "Danny");
@@ -70,7 +70,7 @@ namespace MathClubTracker.Tests
         [TestMethod]
         public void UpdateStudent()
         {
-            svc.InitializeData();
+            //svc.InitializeData();
             ResetUnitOfWork();
 
             StudentSearchCriteria searchCriteria = new StudentSearchCriteria();

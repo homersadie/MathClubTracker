@@ -40,6 +40,13 @@ namespace MathClubTracker.NHibernate.Services
             return students;
         }
 
+        public List<Student> GetStudents(string filter, int skip, int top, string orderby, out int count)
+        {
+            List<Student> students = studentRepo.GetPagedFromOData(filter, skip, top, orderby).ToList();
+            count = GetStudentCount();
+            return students;
+        }
+
         public ServiceResult AddStudent(int? mathGeniusId, string lastName, string firstName, string gender, int? graduationYear)
         {
             ServiceResult result = new ServiceResult();
@@ -77,12 +84,6 @@ namespace MathClubTracker.NHibernate.Services
             return result;
         }
 
-
-
-        public void InitializeData()
-        {
-            studentRepo.InitializeData();
-        }
 
         public List<Student> SearchStudents(StudentSearchCriteria criteria)
         {
@@ -133,6 +134,18 @@ namespace MathClubTracker.NHibernate.Services
             return result;
         }
 
+        public StudentDTO GetStudent(int id)
+        {
+            Student student = studentRepo.Get(id);
+            if (student == null)
+            {
+                return null;
+            } else
+            {
+                return StudentDTO.GetStudentDTOFromStudent(student);
+            }
+        }
+
         public bool UpdateStudent(StudentDTO studentDTO)
         {
             Student student = studentRepo.Get(studentDTO.Id);
@@ -164,17 +177,29 @@ namespace MathClubTracker.NHibernate.Services
             return StudentDTO.GetStudentDTOFromStudent(s);
         }
 
-        public void DeleteStudent(int id)
+        public ServiceResult DeleteStudent(int id)
         {
+            ServiceResult result = new ServiceResult();
             Student student = studentRepo.Get(id);
+            if (student == null)
+            {
+                result.AddError("That student does not exist.");
+                return result;
+            }
+            if (student.MyClassStudents.Count() > 0)
+            {
+                result.AddError("You cannot delete a student who is already enrolled in a class.");
+                return result;
+            }
             studentRepo.Remove(student);
+            return result;
         }
 
-        public IList<Student> GetAttendeesByDate(DateTime sessionDate)
-        {
-            IList<Student> students = studentRepo.GetAttendeesByDate(sessionDate);
-            return students;
-        }
+        //public IList<Student> GetAttendeesByDate(DateTime sessionDate)
+        //{
+        //    IList<Student> students = studentRepo.GetAttendeesByDate(sessionDate);
+        //    return students;
+        //}
 
     }
 }

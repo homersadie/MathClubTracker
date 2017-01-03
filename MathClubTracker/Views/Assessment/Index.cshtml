@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Assessment Maintenance";
+}
+
+<label>Assessment Maintenance Screen</label><br /><br />
+
+<div class="content-container-fluid">
+    <div class="row">
+        <table><tr><td><label>View Assessment : </label></td><td><input id="autoAssessment" /></td><td><input type="button" value="GO" id="btnViewAssessment" onclick="viewFromAuto();" /></td></tr></table>
+        <br /><br />
+    </div>
+    <div class="row">
+        <a href="javascript:addAssessment();">Add Assessment</a>
+    </div>
+
+</div>
+
+
+<div class="content-container-fluid" id="addContainer" style="visibility:hidden">
+    <div class="row">
+        <div class="cols-sample-area">
+            <div class="control">
+                <div id="addForm" title="Add Assessment">
+                    <form id="form1">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>Assessment Class</label><input type="text" id="addClass" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Assessment Date</label><<input id="addSessionDate" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <br />
+                                    <input type="button" id="btnDelete" value="Remove" class="e-btn" onclick="processDelete();" />
+                                    <input type="button" id="btnCancel" value="Cancel" class="e-btn" onclick="deleteDialog.close();" />
+                                    <label class="error" for="btn" generated="false"></label>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var addDialog;
+    $(function () {
+
+        
+        $("#addForm").ejDialog(
+        {
+            enableModal: true,
+            enableResize: false,
+            width: 400,
+            close: "onDialogClose",
+            containment: ".cols-sample-area",
+            showOnInit: false
+        });
+        addDialog = $("#addForm").data("ejDialog");
+
+        $('#addClass').ejDropDownList({
+            dataSource: ej.DataManager({url: "@Url.Action("Class","Code")"   }),
+        watermarkText: "Select a Class Session",
+        width: "100%"
+    });
+
+    });
+
+
+    function addAssessment() {
+        $("#addContainer").css("visibility", "visible");
+        addDialog.open();
+    }
+
+</script>

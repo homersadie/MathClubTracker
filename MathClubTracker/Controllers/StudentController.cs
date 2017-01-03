@@ -47,11 +47,11 @@ namespace MathClubTracker.Controllers
             return true;
         }
 
-        public IList<ClassSession> GetAllAttended(int id)
-        {
-            StudentDTO student = _studentService.GetById(id);
-            return null;
-        }
+        //public IList<ClassSession> GetAllAttended(int id)
+        //{
+        //    StudentDTO student = _studentService.GetById(id);
+        //    return null;
+        //}
 
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         public JsonResult GetAllStudents()
@@ -77,8 +77,8 @@ namespace MathClubTracker.Controllers
         public JsonResult AddStudent(int? MathGeniusId, string LastName, string FirstName, string Sex, int? GraduationYear)
         {
             string sex = Sex == "Male" ? "M" : "F";
-            ServiceResult result = FinalizeResult(_studentService.AddStudent(MathGeniusId, LastName, FirstName, sex , GraduationYear));
-            return Json(new { result = result }, JsonRequestBehavior.AllowGet);
+            ServiceResult result = _studentService.AddStudent(MathGeniusId, LastName, FirstName, sex , GraduationYear);
+            return Json(FinalizeResult(result), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult UploadStudents()
@@ -94,6 +94,21 @@ namespace MathClubTracker.Controllers
             }
             return Json(FinalizeResult(result), JsonRequestBehavior.AllowGet);
         }
+
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        public virtual JsonResult GetStudentDetails(int Id)
+        {
+            StudentDTO student = _studentService.GetStudent(Id);
+            return Json(student, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteStudent(int Id)
+        {
+            ServiceResult result = new ServiceResult();
+            result = _studentService.DeleteStudent(Id);
+            return Json(FinalizeResult(result), JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

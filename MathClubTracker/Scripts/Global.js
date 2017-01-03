@@ -4,7 +4,7 @@
 }
 
 function SuccessfulServiceResult(serviceResult) {
-    if (serviceResult.result.Errors.length > 0) {
+    if (serviceResult.Errors.length > 0) {
         return false;
     }
     return true;
@@ -13,7 +13,7 @@ function SuccessfulServiceResult(serviceResult) {
 
 function Errors(serviceResult) {
     var temp = "";
-    for (var i = 0; i < serviceResult.result.Errors.length; i++) {
+    for (var i = 0; i < serviceResult.Errors.length; i++) {
         if (temp != '') {
             temp += "<br/>";
         }

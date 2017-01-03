@@ -29,7 +29,7 @@ namespace MathClubTracker.Domain.DomainObjects
         public Student()
         {
             OnCreated();
-            this.MyClassSessionStudentBag = new List<ClassSessionStudent>();
+            this.MyClassStudentBag = new List<ClassStudent>();
         }
 
     
@@ -46,7 +46,22 @@ namespace MathClubTracker.Domain.DomainObjects
         [DisplayName("Math Genius Id")]
         public virtual int MathGeniusId { get; set; }
 
-
+        public virtual string Name
+        {
+            get
+            {
+                return String.Format("{0} {1}", FirstName, LastName);
+            }
+            set
+            {
+                var s = value.Split(' ');
+                if (s.Length == 2)
+                {
+                    FirstName = s[0];
+                    LastName = s[1];
+                }
+            }
+        }
     
         [Required]
         [DisplayName("First Name")]
@@ -81,11 +96,11 @@ namespace MathClubTracker.Domain.DomainObjects
             set;
         }
 
-        protected internal virtual IList<ClassSessionStudent> MyClassSessionStudentBag { get; set; }
+        protected internal virtual IList<ClassStudent> MyClassStudentBag { get; set; }
 
-        public virtual ReadOnlyCollection<ClassSessionStudent> MyClassSessionStudents
+        public virtual ReadOnlyCollection<ClassStudent> MyClassStudents
         {
-            get { return new ReadOnlyCollection<ClassSessionStudent>(MyClassSessionStudentBag); }
+            get { return new ReadOnlyCollection<ClassStudent>(MyClassStudentBag); }
         }
 
 

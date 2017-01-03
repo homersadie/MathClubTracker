@@ -30,6 +30,13 @@ namespace MathClubTracker.Domain.DomainTransferObjects
 
         public string LastName { get; set; }
 
+        public string Name {
+            get
+            {
+                return String.Format("{0} {1}", FirstName, LastName);
+            }
+        }
+
         public string Gender { get; set; }
 
         public int? GraduationYear { get; set; }

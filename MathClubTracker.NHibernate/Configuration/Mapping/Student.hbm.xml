@@ -21,11 +21,11 @@
       <column name="GraduationYear" not-null="false" />
     </property>
 
-    <bag name="MyClassSessionStudentBag" inverse="true" generic="true" cascade="all-delete-orphan">
+    <bag name="MyClassStudentBag" inverse="true" generic="true" cascade="all-delete-orphan">
       <key>
         <column name="StudentId" not-null="false" precision="10" scale="0" sql-type="int" />
       </key>
-      <one-to-many class="ClassSessionStudent" />
+      <one-to-many class="ClassStudent" />
     </bag>
     <!--
     <bag name="MyPayments" inverse="true" generic="true">

@@ -7,6 +7,7 @@ using Newtonsoft.Json.Serialization;
 using MathClubTracker.Filters;
 using WebApiContrib.Formatting.Jsonp;
 using System.Web.Http.OData.Builder;
+using System.Web.Http.OData.Extensions;
 using MathClubTracker.Domain.DomainObjects;
 
 
@@ -42,10 +43,22 @@ namespace MathClubTracker
                 defaults: new { Controller = "Student", action = RouteParameter.Optional }
             );
 
+            /*
+            The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
+            */
+
+            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<Student>("Student");
+            config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+            
+
+
+
             // These two lines below change the json result formatting to use camel case instead of pascal case.
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
 
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
 
             var formatter = new JsonpMediaTypeFormatter(jsonFormatter);
             config.Formatters.Insert(0, formatter);

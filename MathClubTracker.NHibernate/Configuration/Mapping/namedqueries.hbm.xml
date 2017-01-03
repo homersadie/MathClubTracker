@@ -3,4 +3,8 @@
   <sql-query name="InitializeData" cacheable="true">
     exec InitializeData 
   </sql-query>
+  <sql-query name="CurrentClasses" cacheable="true">
+    select * from class where year = (select max(year) from class)
+    order by SemesterID desc, CategoryId asc
+  </sql-query>
 </hibernate-mapping>

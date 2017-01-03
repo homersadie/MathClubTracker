@@ -16,11 +16,31 @@
       <column name="CategoryId" not-null="false" precision="10" scale="0" sql-type="int" />
     </property>
 
-    <bag name="MyClassSessionBag" inverse="true" generic="true" cascade="all-delete-orphan">
+    <property name="LocationId" type="Int32">
+      <column name="LocationId" not-null="false" precision="10" scale="0" sql-type="int" />
+    </property>
+
+    <property name="Year" type="Int32">
+      <column name="Year" not-null="false" precision="10" scale="0" sql-type="int" />
+    </property>
+
+    <property name="BeginDate" type="DateTime">
+      <column name="BeginDate" not-null="false" precision="10" scale="0" sql-type="datetime" />
+    </property>
+
+    <property name="EndDate" type="DateTime">
+      <column name="EndDate" not-null="false" precision="10" scale="0" sql-type="datetime" />
+    </property>
+
+    <property name="MeetingTime" type="AnsiString">
+      <column name="MeetingTime" not-null="true" length="50" sql-type="varchar" />
+    </property>    
+
+    <bag name="MyClassStudentBag" inverse="true" generic="true" cascade="all-delete-orphan">
       <key>
         <column name="ClassId" not-null="true" precision="10" scale="0" sql-type="int" />
       </key>
-      <one-to-many class="ClassSession" />
+      <one-to-many class="ClassStudent" />
     </bag>
 
   </class>

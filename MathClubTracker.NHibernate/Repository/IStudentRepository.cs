@@ -18,17 +18,16 @@ namespace MathClubTracker.NHibernate
     {
 
 
-        void InitializeData();
-
         List<Student> Search(Domain.Search.StudentSearchCriteria criteria);
 
 
         IEnumerable<Student> GetPaged(int skip, int top, string orderby);
 
 
-        IList<Student> GetAttendeesByDate(DateTime sessionDate);
+        //IList<Student> GetAttendeesByDate(DateTime sessionDate);
         int GetStudentCount();
 
         Student GetByMathGeniusId(int id);
+        IEnumerable<Student> GetPagedFromOData(string filter, int skip, int top, string orderby);
     }
 }

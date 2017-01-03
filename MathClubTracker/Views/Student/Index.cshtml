@@ -4,8 +4,52 @@
 
 <label>Student Maintenance Screen</label><br/><br/>
 
-<label>Current Students</label>
+
+
+
 <div class="content-container-fluid">
+    <div class="row">
+        <table><tr><td><label>View Student : </label></td><td><input id="autoStudent" /></td><td><input type="button" value="GO" id="btnEditAuto" onclick="editFromAuto();" /></td></tr></table>
+        <br/><br/>
+    </div>
+
+    <div class="row">
+        <label>Add Student</label>
+    </div>
+    <div class="row">
+        <table>
+            <tr>
+                <td>Math Genius Id</td>
+                <td>Last Name</td>
+                <td>First Name</td>
+                <td>Sex</td>
+                <td>Graduation Year</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="txtMathGeniusId" /></td>
+                <td><input type="text" id="txtLastName" /></td>
+                <td><input type="text" id="txtFirstName" /></td>
+                <td>
+                    <input type="text" id="sex" />
+                    <div id="sexList">
+                        <ul>
+                            <li>Male</li>
+                            <li>Female</li>
+                        </ul>
+
+                    </div>
+                </td>
+                <td><input type="text" id="gradyear" /></td>
+                <td><input type="button" id="btnAddStudent" value="Add" ; onclick="AddStudent()" /></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="row">
+        <label>Current Students</label>
+        <br/>
+    </div>
     <div class="row">
         <div class="cols-sample-area" style="width:600px">
 
@@ -19,20 +63,59 @@
 <script type="text/x-jsrender" id="mgTemplate">
 
     <a href="@Url.Action("Detail","Student")?id={{:Id}}">View</a>
-    <a href="@Url.Action("Detail","Student")?id={{:Id}}">Edit</a>
-    <a href="@Url.Action("Detail","Student")?id={{:Id}}">Delete</a>
+    <a href="javascript:editStudent({{:Id}});">Edit</a>
+    <a href="javascript:deleteStudent({{:Id}});">Delete</a>
 </script>
 
+<div class="content-container-fluid" id="deleteContainer" style="visibility:hidden" >
+    <div class="row">
+        <div class="cols-sample-area">
+            <div class="control">
+                <div id="deleteForm" title="Remove Math Genius Student">
+                    <form id="form1">
+                        <input type="hidden" id="deleteId" />
+                        <table>
+                            <tr>
+                                <td>
+                                    Do you wish to remove <label id="deleteName"></label> from the roster?
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <br />
+                                    <input type="button" id="btnDelete" value="Remove" class="e-btn" onclick="processDelete();" />
+                                    <input type="button" id="btnCancel" value="Cancel" class="e-btn" onclick="deleteDialog.close();" />
+                                    <label class="error" for="btn" generated="false"></label>
+                                </td>
+                            </tr>
 
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
     <script type="text/javascript">
 
-
+        var deleteDialog;
 
         $(function () {
-            //debugger;
+            $("#deleteForm").ejDialog(
+                {
+                    enableModal: true,
+                    enableResize: false,
+                    width: 400,
+                    close: "onDialogClose",
+                    containment: ".cols-sample-area",
+                    showOnInit : false
+                });
+
+            deleteDialog = $("#deleteForm").data("ejDialog");
+
             $("#Grid").ejGrid({
                 dataSource: ej.DataManager({ url: "@Url.Action("PagingGetStudents","Student")" }),
                 allowPaging: true,
@@ -49,7 +132,21 @@
                 ]
             });
 
-            @*$("#txtMathGeniusId").ejNumericTextbox(
+            var dataManger = ej.DataManager({
+                url: "../oData"
+            });
+            // Query creation
+            var query = ej.Query().from("Student").select("Id", "Name");
+            $('#autoStudent').ejAutocomplete({
+                dataSource: dataManger,
+                query: query,
+                fields: { text: "Name", key: "Id" },
+                filterType: ej.filterType.StartsWith,
+                watermarkText: "Search for students",
+                width: 200
+            });
+
+            $("#txtMathGeniusId").ejNumericTextbox(
                          {
                              name: "numeric",
                              value: 100,
@@ -63,11 +160,14 @@
             });
 
             $('#gradyear').ejDropDownList({
-                dataSource: ej.DataManager({ url: "@Url.Action("GraduationYear","Code")" }),
-                watermarkText: "Select a Graduation Year",
-                width: "100%"
+                dataSource: ej.DataManager({url: "@Url.Action("GraduationYear","Code")"   }),
+            watermarkText: "Select a Graduation Year",
+            width: "100%"
             });
 
+
+
+            @*
             saveUrl = "@Url.Action("UploadStudents","Student")";
             removeUrl = "@Url.Action("RemoveFile","Student")";
             $("#UploadDefault").ejUploadbox({
@@ -114,4 +214,55 @@
         function resetGrid() {
             $("#Grid").ejGrid("refreshContent");
         }
+
+        function deleteStudent(id) {
+            $.ajax({
+                url: '@Url.Action("GetStudentDetails", "Student")',
+                data: {
+                    Id: id
+                },
+                context: document.body,
+                method: "POST",
+                dataType: "json",
+                success: function (data) {
+                    $("#deleteName").text(data.Name);
+                    $("#deleteId").val(data.Id);
+                    $("#deleteContainer").css("visibility", "visible");
+                    deleteDialog.open();
+                },
+                error: function (data) {
+                    updateStatus("Error", data.responseText, true);
+                }
+            });
+        }
+
+        function editStudent(id) {
+            alert('Edit ' + id);
+        }
+
+        function editFromAuto(id) {
+            if ($("#autoStudent").ejAutocomplete("getSelectedItems").length > 0) {
+                window.location = "@Url.Action("Detail","Student")?id=" + $("#autoStudent").ejAutocomplete("getSelectedItems")[0][0].Id;
+            }
+        }
+
+        function processDelete() {
+            $.ajax({
+                url: '@Url.Action("DeleteStudent", "Student")',
+                data: {
+                    Id: $("#deleteId").val()
+                },
+                context: document.body,
+                method: "POST",
+                dataType: "json",
+                success: function (data) {
+                    deleteDialog.close();
+                    ProcessServiceResult(data, "#updateMessage", resetGrid(), null);
+                },
+                error: function (data) {
+                    updateStatus("Error", data.responseText, true);
+                }
+            });
+        }
+
     </script>
